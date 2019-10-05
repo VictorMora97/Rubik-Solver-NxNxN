@@ -79,10 +79,9 @@ public class Cubo {
 	        } catch (ParseException e) {
 	            e.printStackTrace();
 	        }
-
 	}
 
-		public static String Limpiar(String str) {
+		public static String Limpiar(String str) { //Limpia comas y corchetes
             String limpia = ((str.replaceAll(",","") ).replaceAll("\\[", "")).replaceAll("\\]", "");
             return limpia;
 		}
