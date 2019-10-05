@@ -11,15 +11,16 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class Cubo {
+	
+    private static String[][][] cubo;
+	private static int dimension;
+	private static int contador = 0;
+    private static String stringCubo = "";
+    private static String sucia;
+	private static String ubicacionJSON = "C:\\Users\\victo\\eclipse-workspace\\Sistemas-Inteligentes\\src\\cube.json";
 
 		public static void main(String[] args) {
-			
-			int dimension;
-			int contador = 0;
-            String stringCubo = "";
-            String sucia;
-            String ubicacionJSON = "C:\\Users\\victo\\eclipse-workspace\\Sistemas-Inteligentes\\src\\cube.json";
-
+    	
 	        JSONParser parser = new JSONParser();
 	        
 	        try (Reader reader = new FileReader(ubicacionJSON)) {
@@ -83,7 +84,7 @@ public class Cubo {
 	 * b el numero de fila dentro de esa cara, y c la columna dentro de esa fila
 	 */
 	            
-	            String[][][] cubo = new String[6][dimension][dimension];  
+	            cubo = new String[6][dimension][dimension];  
 	           
     				for(int a=0; a<6; a++) { //ID de caras (BACK=0, DOWN=1...etc)
     					for(int b=0; b<dimension; b++) { //Fila
