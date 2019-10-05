@@ -90,13 +90,13 @@ public class Cubo {
     					for(int b=0; b<dimension; b++) { //Fila
     						for(int c=0; c<dimension; c++) { //Columna
     							
-		            			cubo[a][b][c]=array[contador];
+		            			cubo[a][c][b]=array[contador];
 	            				contador = contador + 1;
 	            				
 	            			}
 	            		}            				
-	            	}	
-    				
+	            	}
+    				   				
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        } catch (ParseException e) {
@@ -107,5 +107,33 @@ public class Cubo {
 		public static String Limpiar(String str) { 
             String limpia = ((str.replaceAll(",","") ).replaceAll("\\[", "")).replaceAll("\\]", "");
             return limpia;
+		}
+		
+		/*  MOVIMIENTOS  */
+		
+		/* ROJO: 0             BACK: 0
+		 * AZUL: 1			   DOWN: 1
+		 * AMARILLO: 2		   FRONT: 2
+		 * VERDE: 3            LEFT: 3
+		 * NARANJA: 4		   RIGHT: 4
+		 * BLANCO: 5		   UP: 5
+		 */
+		
+		public static void L0(String[][][] estadoCubo) {
+	
+			String c1 = cubo[5][2][2];
+			String c2 = cubo[0][0][0];
+			String c3 = cubo[1][0][0];
+			String c4 = cubo[2][0][0];
+			String c5 = cubo[3][0][0];
+			String c6 = cubo[3][2][0];
+			
+			cubo[5][2][2] = c2;
+			cubo[0][0][0] = c3;
+			cubo[1][0][0] = c4;
+			cubo[2][0][0] = c1;
+			cubo[3][0][0] = c6;
+			cubo[3][2][0] = c5;	
+	
 		}
 }
