@@ -17,6 +17,7 @@ public class Cubo {
 	private static int contador = 0;
     private static String stringCubo = "";
     private static String sucia;
+    private static String c1, c2, c3, c4, c5, c6;
 	private static String ubicacionJSON = "C:\\Users\\victo\\eclipse-workspace\\Sistemas-Inteligentes\\src\\cube.json";
 
 		public static void main(String[] args) {
@@ -92,6 +93,7 @@ public class Cubo {
     							
 		            			cubo[a][c][b]=array[contador];
 	            				contador = contador + 1;
+	            				System.out.print(cubo[a][c][b]);
 	            				
 	            			}
 	            		}            				
@@ -117,23 +119,37 @@ public class Cubo {
 		 * VERDE: 3            LEFT: 3
 		 * NARANJA: 4		   RIGHT: 4
 		 * BLANCO: 5		   UP: 5
+		 * 
+		 * Flag: 0(+90º) y 1(-90º)
 		 */
 		
-		public static void L0(String[][][] estadoCubo) {
-	
-			String c1 = cubo[5][2][2];
-			String c2 = cubo[0][0][0];
-			String c3 = cubo[1][0][0];
-			String c4 = cubo[2][0][0];
-			String c5 = cubo[3][0][0];
-			String c6 = cubo[3][2][0];
+		public static void L0(String[][][] estadoCubo, int flag) {
+
+			c1 = cubo[5][2][2];
+			c2 = cubo[0][0][0];
+			c3 = cubo[1][0][0];
+			c4 = cubo[2][0][0];
+			c5 = cubo[3][0][0];
+			c6 = cubo[3][2][0];
 			
+			if(flag==0) {			
 			cubo[5][2][2] = c2;
 			cubo[0][0][0] = c3;
 			cubo[1][0][0] = c4;
 			cubo[2][0][0] = c1;
 			cubo[3][0][0] = c6;
+			cubo[3][2][0] = c5;		
+			}
+			
+			if(flag==1) {
+			cubo[5][2][2] = c4;
+			cubo[0][0][0] = c1;
+			cubo[1][0][0] = c2;
+			cubo[2][0][0] = c3;
+			cubo[3][0][0] = c6;
 			cubo[3][2][0] = c5;	
-	
+				
+			}	
 		}
+		
 }
