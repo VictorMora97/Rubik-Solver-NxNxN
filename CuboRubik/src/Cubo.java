@@ -20,6 +20,7 @@ public class Cubo {
 	private static int contador = 0;
     private static String stringCubo = "";
     private static String sucia;
+    private static Object clon;
 	private static String ubicacionJSON = "C:\\Users\\victo\\eclipse-workspace\\Sistemas-Inteligentes\\src\\cube.json";
 
 		public static void main(String[] args) {
@@ -78,7 +79,7 @@ public class Cubo {
 	                stringCubo = stringCubo + Limpiar(sucia);
 	            }
 	            
-	            dimension = (stringCubo.length())/18;
+	            dimension = (int)Math.sqrt((stringCubo.length())/6);
 	            String array[] = stringCubo.split("");
 	            
 	/* 
@@ -100,6 +101,7 @@ public class Cubo {
 	            			}
 	            		}            				
 	            	}
+    	    clon = cubo.clone();
     				
 	        } catch (IOException e) {
 	            e.printStackTrace();
@@ -143,6 +145,7 @@ public class Cubo {
 		 * 
 		 * Flag: 0(+90º) y 1(-90º)
 		 */
+		
 		
 
 		
