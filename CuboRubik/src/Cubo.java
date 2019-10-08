@@ -2,6 +2,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -17,7 +20,6 @@ public class Cubo {
 	private static int contador = 0;
     private static String stringCubo = "";
     private static String sucia;
-    private static String c1, c2, c3, c4, c5, c6;
 	private static String ubicacionJSON = "C:\\Users\\victo\\eclipse-workspace\\Sistemas-Inteligentes\\src\\cube.json";
 
 		public static void main(String[] args) {
@@ -98,7 +100,7 @@ public class Cubo {
 	            			}
 	            		}            				
 	            	}
-    				   				
+    				
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        } catch (ParseException e) {
@@ -110,6 +112,25 @@ public class Cubo {
             String limpia = ((str.replaceAll(",","") ).replaceAll("\\[", "")).replaceAll("\\]", "");
             return limpia;
 		}
+		
+		public static String MD5(String input) 
+	    { 
+	        try { 
+	            MessageDigest md = MessageDigest.getInstance("MD5");  
+	            byte[] messageDigest = md.digest(input.getBytes()); 
+	            BigInteger no = new BigInteger(1, messageDigest);  
+	            String hashtext = no.toString(16); 
+	            while (hashtext.length() < 32) { 
+	                hashtext = "0" + hashtext; 
+	            } 
+	            return hashtext; 
+	        }  
+	        catch (NoSuchAlgorithmException e) { 
+	            throw new RuntimeException(e); 
+	        } 
+	   }
+}
+
 		
 		/*  MOVIMIENTOS  */
 		
@@ -123,33 +144,6 @@ public class Cubo {
 		 * Flag: 0(+90º) y 1(-90º)
 		 */
 		
-		public static void L0(String[][][] estadoCubo, int flag) {
 
-			c1 = cubo[5][2][2];
-			c2 = cubo[0][0][0];
-			c3 = cubo[1][0][0];
-			c4 = cubo[2][0][0];
-			c5 = cubo[3][0][0];
-			c6 = cubo[3][2][0];
-			
-			if(flag==0) {			
-			cubo[5][2][2] = c2;
-			cubo[0][0][0] = c3;
-			cubo[1][0][0] = c4;
-			cubo[2][0][0] = c1;
-			cubo[3][0][0] = c6;
-			cubo[3][2][0] = c5;		
-			}
-			
-			if(flag==1) {
-			cubo[5][2][2] = c4;
-			cubo[0][0][0] = c1;
-			cubo[1][0][0] = c2;
-			cubo[2][0][0] = c3;
-			cubo[3][0][0] = c6;
-			cubo[3][2][0] = c5;	
-				
-			}	
-		}
 		
-}
+
