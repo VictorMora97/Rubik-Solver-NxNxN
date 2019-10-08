@@ -96,11 +96,14 @@ public class Cubo {
     							
 		            			cubo[a][c][b]=array[contador];
 	            				contador = contador + 1;
-	            				System.out.print(cubo[a][c][b]);
+	            				//System.out.print(cubo[a][c][b]);
 	            				
 	            			}
 	            		}            				
 	            	}
+
+    			//ObtenerLinea(cubo, 1,1,-1);
+
     		
 	        } catch (IOException e) {
 	            e.printStackTrace();
@@ -114,7 +117,7 @@ public class Cubo {
             return limpia;
 		}
 		
-		public static void Pintar(String[][][] cubo) {
+		public static void pintarCubo(String[][][] cubo) {
 			
 			System.out.print("\n");
 			for(int a=0; a<6; a++) { 
@@ -125,6 +128,10 @@ public class Cubo {
         			}
         		}            				
         	}
+		}
+		
+		public static void Pintar(Object input) {
+			System.out.println(input);
 		}
 		
 		public static String MD5(String input) 
@@ -143,10 +150,6 @@ public class Cubo {
 	            throw new RuntimeException(e); 
 	        } 
 	   }
-}
-
-		
-		/*  MOVIMIENTOS  */
 		
 		/* ROJO: 0             BACK: 0
 		 * AZUL: 1			   DOWN: 1
@@ -157,6 +160,27 @@ public class Cubo {
 		 * 
 		 * Flag: 0(+90º) y 1(-90º)
 		 */
+		
+		public static void rotacionLineal(String[][][] cubo, String c1, String c2, String c3, String c4) {
+			
+		}
+		
+		public static String[] ObtenerLinea(String[][][] cubo, int cara, int columna, int fila) { //Si columna, fila -1
+			
+			String aux[] = new String[dimension*4];
+			if(fila == -1) { //COLUMNAS
+				for(int i=0;i<dimension;i++) {
+					 aux[i] = cubo[cara][columna][i];
+					 System.out.print(aux[i]);
+				}
+			}		
+			return aux;	
+		}
+		
+} 
+
+		
+
 		
 		
 
