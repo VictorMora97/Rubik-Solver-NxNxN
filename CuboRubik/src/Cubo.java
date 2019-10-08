@@ -101,8 +101,7 @@ public class Cubo {
 	            			}
 	            		}            				
 	            	}
-    	    clon = cubo.clone();
-    				
+    		
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        } catch (ParseException e) {
@@ -113,6 +112,19 @@ public class Cubo {
 		public static String Limpiar(String str) { 
             String limpia = ((str.replaceAll(",","") ).replaceAll("\\[", "")).replaceAll("\\]", "");
             return limpia;
+		}
+		
+		public static void Pintar(String[][][] cubo) {
+			
+			System.out.print("\n");
+			for(int a=0; a<6; a++) { 
+				for(int b=0; b<dimension; b++) { 
+					for(int c=0; c<dimension; c++) { 		
+						System.out.print(cubo[a][c][b]);
+        				
+        			}
+        		}            				
+        	}
 		}
 		
 		public static String MD5(String input) 
