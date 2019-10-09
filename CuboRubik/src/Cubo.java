@@ -101,10 +101,10 @@ public class Cubo {
 	            			}
 	            		}            				
 	            	}
-
-    			//ObtenerLinea(cubo, 1,1,-1);
-
-    		
+    				//pintarCubo(cubo);
+    				//String cr[] =ObtenerLinea(cubo,1,0,-1);
+    				//AsignarLinea(cubo,cr,0,0,-1);
+    	    		//pintarCubo(cubo);
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        } catch (ParseException e) {
@@ -124,14 +124,13 @@ public class Cubo {
 				for(int b=0; b<dimension; b++) { 
 					for(int c=0; c<dimension; c++) { 		
 						System.out.print(cubo[a][c][b]);
-        				
         			}
         		}            				
         	}
 		}
 		
 		public static void Pintar(Object input) {
-			System.out.println(input);
+			System.out.print(input);
 		}
 		
 		public static String MD5(String input) 
@@ -167,17 +166,32 @@ public class Cubo {
 		
 		public static String[] ObtenerLinea(String[][][] cubo, int cara, int columna, int fila) { //Si columna, fila -1
 			
-			String aux[] = new String[dimension*4];
+			String aux[] = new String[dimension];
+			String temp;
 			if(fila == -1) { //COLUMNAS
 				for(int i=0;i<dimension;i++) {
-					 aux[i] = cubo[cara][columna][i];
-					 System.out.print(aux[i]);
+					 temp = cubo[cara][columna][i];
+					 aux[i] = temp;
+					// Pintar(aux[i]);
 				}
-			}		
+			} //Pintar("\n");			
 			return aux;	
 		}
 		
-} 
+		public static void AsignarLinea(String[][][] cubo, String linea[], int cara, int columna, int fila) { //Si columna, fila -1
+			
+			String temp;
+			if(fila == -1) { //COLUMNAS
+				for(int i=0;i<dimension;i++) {
+					 temp = linea[i];
+					 Pintar(temp);
+					cubo[cara][columna][i] = temp;
+					 
+				}
+			} //Pintar("\n");				
+		}	
+}     			
+				
 
 		
 
