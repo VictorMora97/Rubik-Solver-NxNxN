@@ -16,6 +16,7 @@ import org.json.simple.parser.ParseException;
 public class Cubo {
 	
     private static String[][][] cubo;
+    private static String[] c1,c2,c3,c4;
 	private static int dimension;
 	private static int contador = 0;
     private static String stringCubo = "";
@@ -85,7 +86,7 @@ public class Cubo {
 	/* 
 	 * Tras el proceso de conversion del JSON a un string, se asignan los valores a cada "mini-cubo" correspondiente.
 	 * El cubo se representa con un array tridimensional --> cubo[a][b][c], siendo 'a' el ID correspondiente a cada cara,
-	 * b el numero de fila dentro de esa cara, y c la columna dentro de esa filaa
+	 * b el numero de fila dentro de esa cara, y c la columna dentro de esa fila
 	 */
 	            
 	            cubo = new String[6][dimension][dimension];  
@@ -101,10 +102,7 @@ public class Cubo {
 	            			}
 	            		}            				
 	            	}
-    				//pintarCubo(cubo);
-    				//String cr[] =ObtenerLinea(cubo,1,0,-1);
-    				//AsignarLinea(cubo,cr,0,0,-1);
-    	    		//pintarCubo(cubo);
+
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        } catch (ParseException e) {
@@ -160,8 +158,15 @@ public class Cubo {
 		 * Flag: 0(+90º) y 1(-90º)
 		 */
 		
-		public static void rotacionLineal(String[][][] cubo, String c1, String c2, String c3, String c4) {
-			
+		public static void L(String[][][] cubo,int numero) {
+			c1 = ObtenerLinea(cubo,0,numero,-1);
+			c2 = ObtenerLinea(cubo,1,numero,-1);
+			c3 = ObtenerLinea(cubo,2,numero,-1);
+			c4 = ObtenerLinea(cubo,5,(dimension-1)-numero,-1);
+			AsignarLinea(cubo,c1,5,(dimension-1)-numero,-1);
+			AsignarLinea(cubo,c2,0,numero,-1);
+			AsignarLinea(cubo,c3,1,numero,-1);
+			AsignarLinea(cubo,c4,2,numero,-1);		
 		}
 		
 		public static String[] ObtenerLinea(String[][][] cubo, int cara, int columna, int fila) { //Si columna, fila -1
@@ -184,7 +189,6 @@ public class Cubo {
 			if(fila == -1) { //COLUMNAS
 				for(int i=0;i<dimension;i++) {
 					 temp = linea[i];
-					 Pintar(temp);
 					cubo[cara][columna][i] = temp;
 					 
 				}
