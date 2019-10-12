@@ -16,12 +16,11 @@ import org.json.simple.parser.ParseException;
 public class Cubo {
 	
     private static String[][][] cubo;
-    private static String[] c1,c2,c3,c4;
+    private static String[] c1,c2,c3,c4,c5,c6;
 	private static int dimension;
 	private static int contador = 0;
     private static String stringCubo = "";
     private static String sucia;
-    private static Object clon;
 	private static String ubicacionJSON = "C:\\Users\\victo\\eclipse-workspace\\Sistemas-Inteligentes\\src\\cube.json";
 
 		public static void main(String[] args) {
@@ -102,6 +101,21 @@ public class Cubo {
 	            			}
 	            		}            				
 	            	}
+    				
+    				pintarCubo(cubo);
+    				Pintar("\n");
+    				L(cubo,0);
+    				pintarCubo(cubo);
+    				Pintar("\n");
+    				L(cubo,0);
+    				pintarCubo(cubo);
+    				Pintar("\n");
+    				L(cubo,0);
+    				pintarCubo(cubo);
+    				Pintar("\n");
+    				L(cubo,0);
+    				pintarCubo(cubo);
+
 
 	        } catch (IOException e) {
 	            e.printStackTrace();
@@ -160,13 +174,18 @@ public class Cubo {
 		
 		public static void L(String[][][] cubo,int numero) {
 			c1 = ObtenerLinea(cubo,0,numero,-1);
+			c5 = InvertirLinea(c1);		
 			c2 = ObtenerLinea(cubo,1,numero,-1);
 			c3 = ObtenerLinea(cubo,2,numero,-1);
 			c4 = ObtenerLinea(cubo,5,(dimension-1)-numero,-1);
-			AsignarLinea(cubo,c1,5,(dimension-1)-numero,-1);
+			c6 = InvertirLinea(c4);
+			AsignarLinea(cubo,c5,5,(dimension-1)-numero,-1);
 			AsignarLinea(cubo,c2,0,numero,-1);
 			AsignarLinea(cubo,c3,1,numero,-1);
-			AsignarLinea(cubo,c4,2,numero,-1);		
+			AsignarLinea(cubo,c6,2,numero,-1);
+			if (numero==0) { //LEFT (3) Gira
+				//girar matriz CARA entera
+			}
 		}
 		
 		public static String[] ObtenerLinea(String[][][] cubo, int cara, int columna, int fila) { //Si columna, fila -1
@@ -177,9 +196,8 @@ public class Cubo {
 				for(int i=0;i<dimension;i++) {
 					 temp = cubo[cara][columna][i];
 					 aux[i] = temp;
-					// Pintar(aux[i]);
 				}
-			} //Pintar("\n");			
+			}			
 			return aux;	
 		}
 		
@@ -192,8 +210,17 @@ public class Cubo {
 					cubo[cara][columna][i] = temp;
 					 
 				}
-			} //Pintar("\n");				
-		}	
+			} 			
+		}
+		
+		public static String[] InvertirLinea(String linea[]) {
+			
+			String aux[] = new String[dimension];
+			for(int i=0; i<dimension ;i++) {
+				aux[i]= linea[dimension-1-i];
+			}
+			return aux;
+		}
 }     			
 				
 
