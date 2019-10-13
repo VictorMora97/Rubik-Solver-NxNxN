@@ -104,16 +104,16 @@ public class Cubo {
     				
     				pintarCubo(cubo);
     				Pintar("\n");
-    				L(cubo,0);
+    				L(cubo,0,0);
     				pintarCubo(cubo);
     				Pintar("\n");
-    				L(cubo,0);
+    				L(cubo,0,1);
     				pintarCubo(cubo);
     				Pintar("\n");
-    				L(cubo,0);
+    				L(cubo,0,1);
     				pintarCubo(cubo);
     				Pintar("\n");
-    				L(cubo,0);
+    				L(cubo,0,0);
     				pintarCubo(cubo);
 
 
@@ -172,27 +172,56 @@ public class Cubo {
 		 * Flag: 0(+90º) y 1(-90º)
 		 */
 		
-		public static void L(String[][][] cubo,int numero) {
-			c1 = ObtenerLinea(cubo,0,numero,-1);
-			c5 = InvertirLinea(c1);		
-			c2 = ObtenerLinea(cubo,1,numero,-1);
-			c3 = ObtenerLinea(cubo,2,numero,-1);
-			c4 = ObtenerLinea(cubo,5,(dimension-1)-numero,-1);
-			c6 = InvertirLinea(c4);
-			AsignarLinea(cubo,c5,5,(dimension-1)-numero,-1);
-			AsignarLinea(cubo,c2,0,numero,-1);
-			AsignarLinea(cubo,c3,1,numero,-1);
-			AsignarLinea(cubo,c6,2,numero,-1);
+		public static void L(String[][][] cubo,int numero, int flag) {
 			
-			if (numero==0) { //LEFT (3) Gira
-				String[][] a1 = ObtenerMatriz(cubo,3);
-				String[][] a2 = RotarCara(a1);
-				AsignarMatriz(cubo,a2,3);
+			if(flag==0) {
+				c1 = ObtenerLinea(cubo,0,numero,-1);
+				c5 = InvertirLinea(c1);		
+				c2 = ObtenerLinea(cubo,1,numero,-1);
+				c3 = ObtenerLinea(cubo,2,numero,-1);
+				c4 = ObtenerLinea(cubo,5,(dimension-1)-numero,-1);
+				c6 = InvertirLinea(c4);
+				AsignarLinea(cubo,c5,5,(dimension-1)-numero,-1);
+				AsignarLinea(cubo,c2,0,numero,-1);
+				AsignarLinea(cubo,c3,1,numero,-1);
+				AsignarLinea(cubo,c6,2,numero,-1);
+				
+				if (numero==0) { //LEFT (3) Gira
+					String[][] a1 = ObtenerMatriz(cubo,3);
+					String[][] a2 = RotarCara(a1);
+					AsignarMatriz(cubo,a2,3);
+				}
+				if(numero==dimension) { //RIGHT (4) Gira
+					String[][] a1 = ObtenerMatriz(cubo,4);
+					String[][] a2 = RotarCara(a1);
+					AsignarMatriz(cubo,a2,4);
+				}
 			}
-			if(numero==dimension) { //RIGHT (4) Gira
-				String[][] a1 = ObtenerMatriz(cubo,4);
-				String[][] a2 = RotarCara(a1);
-				AsignarMatriz(cubo,a2,4);
+			
+			if(flag==1) {
+				c1 = ObtenerLinea(cubo,0,numero,-1);		
+				c2 = ObtenerLinea(cubo,1,numero,-1);
+				c3 = ObtenerLinea(cubo,2,numero,-1);
+				c5 = InvertirLinea(c3);
+				c4 = ObtenerLinea(cubo,5,(dimension-1)-numero,-1);
+				c6 = InvertirLinea(c4);
+				AsignarLinea(cubo,c5,5,(dimension-1)-numero,-1);
+				AsignarLinea(cubo,c6,0,numero,-1);
+				AsignarLinea(cubo,c1,1,numero,-1);
+				AsignarLinea(cubo,c2,2,numero,-1);
+				
+				for(int i=0; i<3; i++) { //Lo gira 3 veces = inversa	
+					if (numero==0) { //LEFT (3) Gira
+						String[][] a1 = ObtenerMatriz(cubo,3);
+						String[][] a2 = RotarCara(a1);
+						AsignarMatriz(cubo,a2,3);
+					}
+					if(numero==dimension) { //RIGHT (4) Gira
+						String[][] a1 = ObtenerMatriz(cubo,4);
+						String[][] a2 = RotarCara(a1);
+						AsignarMatriz(cubo,a2,4);
+					}
+				}
 			}
 		}
 		
