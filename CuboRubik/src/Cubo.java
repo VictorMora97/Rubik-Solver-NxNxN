@@ -205,7 +205,13 @@ public class Cubo {
 					 temp = cubo[cara][columna][i];
 					 aux[i] = temp;
 				}
-			}			
+			}
+			if(columna == -1) { //FILAS
+				for(int i=0;i<dimension;i++) {
+					 temp = cubo[cara][i][fila];
+					 aux[i] = temp;
+				}
+			}
 			return aux;	
 		}
 		
@@ -217,7 +223,13 @@ public class Cubo {
 					temp = linea[i];
 					cubo[cara][columna][i] = temp;			 
 				}
-			} 			
+			} 
+			if(columna == -1) { //FILAS
+				for(int i=0;i<dimension;i++) {
+					temp = linea[i];
+					cubo[cara][i][fila] = temp;			 
+				}
+			}
 		}
 		
 		public static String[] InvertirLinea(String linea[]) {
