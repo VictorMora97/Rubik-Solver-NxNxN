@@ -183,8 +183,16 @@ public class Cubo {
 			AsignarLinea(cubo,c2,0,numero,-1);
 			AsignarLinea(cubo,c3,1,numero,-1);
 			AsignarLinea(cubo,c6,2,numero,-1);
+			
 			if (numero==0) { //LEFT (3) Gira
-				//girar matriz CARA entera
+				String[][] a1 = ObtenerMatriz(cubo,3);
+				String[][] a2 = RotarCara(a1);
+				AsignarMatriz(cubo,a2,3);
+			}
+			if(numero==dimension) { //RIGHT (4) Gira
+				String[][] a1 = ObtenerMatriz(cubo,4);
+				String[][] a2 = RotarCara(a1);
+				AsignarMatriz(cubo,a2,4);
 			}
 		}
 		
@@ -206,9 +214,8 @@ public class Cubo {
 			String temp;
 			if(fila == -1) { //COLUMNAS
 				for(int i=0;i<dimension;i++) {
-					 temp = linea[i];
-					cubo[cara][columna][i] = temp;
-					 
+					temp = linea[i];
+					cubo[cara][columna][i] = temp;			 
 				}
 			} 			
 		}
@@ -220,6 +227,41 @@ public class Cubo {
 				aux[i]= linea[dimension-1-i];
 			}
 			return aux;
+		}
+		
+		public static String[][] ObtenerMatriz(String[][][] cubo, int cara) { 
+			
+			String aux[][] = new String[dimension][dimension];
+			String temp;
+				for(int i=0;i<dimension;i++) {
+					for(int j=0;j<dimension;j++) {
+						temp = cubo[cara][j][i];
+						aux[i][j] = temp;
+					}
+				}			
+			return aux;	
+		}
+		
+		public static String[][] RotarCara(String[][] cara){
+
+			String[][] girada = new String[dimension][dimension];
+			for(int i=0,j=dimension-1; i<dimension && j>=0;i++,j--) {
+				for(int z=0;z<dimension;z++) {
+					girada[z][j]= cara[i][z];
+				}
+			}	
+			return girada;
+		}
+		
+		public static void AsignarMatriz(String[][][] cubo, String matriz[][], int cara) { 
+			
+			String temp; 
+			for(int b=0; b<dimension; b++) { 
+				for(int c=0; c<dimension; c++) { 
+					temp = matriz[b][c];
+					cubo[cara][c][b]=temp;
+        		}
+        	}            						
 		}
 }     			
 				
