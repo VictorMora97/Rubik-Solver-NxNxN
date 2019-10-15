@@ -7,6 +7,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Vector;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -21,7 +22,7 @@ public class Cubo {
 	private static int contador = 0;
     private static String stringCubo = "";
     private static String sucia;
-	private static String ubicacionJSON = "C:\\Users\\victo\\eclipse-workspace\\Sistemas-Inteligentes\\src\\cube.json";
+	private static String ubicacionJSON = "C:\\Users\\victo\\OneDrive\\Desktop\\Sistemas Inteligentes\\JSON\\test1.json";
 
 		public static void main(String[] args) {
     	
@@ -89,33 +90,21 @@ public class Cubo {
 	 */
 	            
 	            cubo = new String[6][dimension][dimension];  
-	           
+	            
     				for(int a=0; a<6; a++) { //ID de caras (BACK=0, DOWN=1...etc)
     					for(int b=0; b<dimension; b++) { //Fila
-    						for(int c=0; c<dimension; c++) { //Columna
-    							
+    						for(int c=0; c<dimension; c++) { //Columna							 
 		            			cubo[a][c][b]=array[contador];
 	            				contador = contador + 1;
-	            				//System.out.print(cubo[a][c][b]);
-	            				
+	            				//System.out.print(cubo[a][c][b]);	
 	            			}
 	            		}            				
 	            	}
     				
-    				pintarCubo(cubo);
+    				PintarMD5(cubo);
     				Pintar("\n");
-    				D(cubo,0,90);
-    				pintarCubo(cubo);
-    				Pintar("\n");
-    				D(cubo,0,90);
-    				pintarCubo(cubo);
-    				Pintar("\n");
-    				D(cubo,0,90);
-    				pintarCubo(cubo);
-    				Pintar("\n");
-    				D(cubo,0,90);
-    				pintarCubo(cubo);
-
+    				L(cubo,3,-90);
+    				PintarMD5(cubo);
 
 	        } catch (IOException e) {
 	            e.printStackTrace();
@@ -123,44 +112,6 @@ public class Cubo {
 	            e.printStackTrace();
 	        }
 	}
-		
-		public static String Limpiar(String str) { 
-            String limpia = ((str.replaceAll(",","") ).replaceAll("\\[", "")).replaceAll("\\]", "");
-            return limpia;
-		}
-		
-		public static void pintarCubo(String[][][] cubo) {
-			
-			System.out.print("\n");
-			for(int a=0; a<6; a++) { 
-				for(int b=0; b<dimension; b++) { 
-					for(int c=0; c<dimension; c++) { 		
-						System.out.print(cubo[a][c][b]);
-        			}
-        		}            				
-        	}
-		}
-		
-		public static void Pintar(Object input) {
-			System.out.print(input);
-		}
-		
-		public static String MD5(String input) 
-	    { 
-	        try { 
-	            MessageDigest md = MessageDigest.getInstance("MD5");  
-	            byte[] messageDigest = md.digest(input.getBytes()); 
-	            BigInteger no = new BigInteger(1, messageDigest);  
-	            String hashtext = no.toString(16); 
-	            while (hashtext.length() < 32) { 
-	                hashtext = "0" + hashtext; 
-	            } 
-	            return hashtext; 
-	        }  
-	        catch (NoSuchAlgorithmException e) { 
-	            throw new RuntimeException(e); 
-	        } 
-	   }
 		
 		/* ROJO: 0             BACK: 0
 		 * AZUL: 1			   DOWN: 1
@@ -210,17 +161,15 @@ public class Cubo {
 				AsignarLinea(cubo,c1,1,numero,-1);
 				AsignarLinea(cubo,c2,2,numero,-1);
 				
-				if (numero==0) {
+				if (numero==0) { //LEFT (3) Gira
 					for(int i=0; i<3; i++) { //Lo gira 3 veces = inversa	
-					  //LEFT (3) Gira
 						String[][] a1 = ObtenerMatriz(cubo,3);
 						String[][] a2 = RotarCara(a1);
 						AsignarMatriz(cubo,a2,3);
 					}
 				}
-				if(numero==dimension-1) {
+				if(numero==dimension-1) { //RIGHT (4) Gira
 					for(int i=0; i<3; i++) {
-						//RIGHT (4) Gira
 						String[][] a1 = ObtenerMatriz(cubo,4);
 						String[][] a2 = RotarCara(a1);
 						AsignarMatriz(cubo,a2,4);
@@ -337,8 +286,13 @@ public class Cubo {
 			}
 		}
 		
+		/*
+		 *  --------------------------------
+		 * 	----- FUNCIONES AUXILIARES -----
+		 *  -------------------------------- 
+		 */
+		
 		public static String[] ObtenerLinea(String[][][] cubo, int cara, int columna, int fila) { //Si columna, fila -1
-			
 			String aux[] = new String[dimension];
 			String temp;
 			if(fila == -1) { //COLUMNAS
@@ -357,7 +311,6 @@ public class Cubo {
 		}
 		
 		public static void AsignarLinea(String[][][] cubo, String linea[], int cara, int columna, int fila) { //Si columna, fila -1
-			
 			String temp;
 			if(fila == -1) { //COLUMNAS
 				for(int i=0;i<dimension;i++) {
@@ -373,8 +326,7 @@ public class Cubo {
 			}
 		}
 		
-		public static String[] InvertirLinea(String linea[]) {
-			
+		public static String[] InvertirLinea(String linea[]) {	
 			String aux[] = new String[dimension];
 			for(int i=0; i<dimension ;i++) {
 				aux[i]= linea[dimension-1-i];
@@ -382,8 +334,7 @@ public class Cubo {
 			return aux;
 		}
 		
-		public static String[][] ObtenerMatriz(String[][][] cubo, int cara) { 
-			
+		public static String[][] ObtenerMatriz(String[][][] cubo, int cara) { 		
 			String aux[][] = new String[dimension][dimension];
 			String temp;
 				for(int i=0;i<dimension;i++) {
@@ -396,7 +347,6 @@ public class Cubo {
 		}
 		
 		public static String[][] RotarCara(String[][] cara){
-
 			String[][] girada = new String[dimension][dimension];
 			for(int i=0,j=dimension-1; i<dimension && j>=0;i++,j--) {
 				for(int z=0;z<dimension;z++) {
@@ -406,8 +356,7 @@ public class Cubo {
 			return girada;
 		}
 		
-		public static void AsignarMatriz(String[][][] cubo, String matriz[][], int cara) { 
-			
+		public static void AsignarMatriz(String[][][] cubo, String matriz[][], int cara) { 	
 			String temp; 
 			for(int b=0; b<dimension; b++) { 
 				for(int c=0; c<dimension; c++) { 
@@ -416,6 +365,60 @@ public class Cubo {
         		}
         	}            						
 		}
+		
+		public static String Limpiar(String str) { 
+            String limpia = (((str.replaceAll(",","") ).replaceAll("\\[", "")).replaceAll("\\]", "").replaceAll(" ", ""));
+            return limpia;
+		}
+		
+		public static void PintarCubo(String[][][] cubo) {	
+			System.out.print("\n");
+			for(int a=0; a<6; a++) { 
+				for(int b=0; b<dimension; b++) { 
+					for(int c=0; c<dimension; c++) { 		
+						System.out.print(cubo[a][c][b]);
+        			}
+        		}            				
+        	}
+		}
+		
+		public static void Pintar(Object input) {
+			System.out.print(input);
+		}
+		
+		public static void PintarMD5 (String[][][] cubo) {
+			
+			int cont = 0;
+			Vector vector = new Vector(500,50);	
+			for(int a=0; a<6; a++) { 
+				for(int b=0; b<dimension; b++) {
+					for(int c=0; c<dimension; c++) { 					
+						vector.addElement(cubo[a][c][b]);
+        				cont = cont + 1;     				
+        			}
+        		}            				
+        	}
+			String sucia = vector.toString();
+			String limpia = (Limpiar(sucia));
+			Pintar(MD5(limpia));
+		}
+		
+		public static String MD5(String input) 
+	    { 
+	        try { 
+	            MessageDigest md = MessageDigest.getInstance("MD5");  
+	            byte[] messageDigest = md.digest(input.getBytes()); 
+	            BigInteger no = new BigInteger(1, messageDigest);  
+	            String hashtext = no.toString(16); 
+	            while (hashtext.length() < 32) { 
+	                hashtext = "0" + hashtext; 
+	            } 
+	            return hashtext; 
+	        }  
+	        catch (NoSuchAlgorithmException e) { 
+	            throw new RuntimeException(e); 
+	        } 
+	   }
 }     			
 				
 
