@@ -104,16 +104,16 @@ public class Cubo {
     				
     				pintarCubo(cubo);
     				Pintar("\n");
-    				L(cubo,0,90);
+    				D(cubo,0,90);
     				pintarCubo(cubo);
     				Pintar("\n");
-    				L(cubo,0,-90);
+    				D(cubo,0,90);
     				pintarCubo(cubo);
     				Pintar("\n");
-    				L(cubo,0,90);
+    				D(cubo,0,90);
     				pintarCubo(cubo);
     				Pintar("\n");
-    				L(cubo,0,90);
+    				D(cubo,0,90);
     				pintarCubo(cubo);
 
 
@@ -279,6 +279,58 @@ public class Cubo {
 						String[][] a1 = ObtenerMatriz(cubo,5);
 						String[][] a2 = RotarCara(a1);
 						AsignarMatriz(cubo,a2,5);
+					}
+				}
+				
+			}
+		}
+		
+		public static void B(String[][][] cubo,int numero, int flag) {
+			
+			if(flag==90) {
+				c1 = ObtenerLinea(cubo,3,numero,-1);
+				c2 = ObtenerLinea(cubo,1,numero,-1);
+				c3 = ObtenerLinea(cubo,4,numero,-1);
+				c4 = ObtenerLinea(cubo,5,numero,-1);
+				AsignarLinea(cubo,c1,1,numero, -1);
+				AsignarLinea(cubo,c2,4,numero, -1);
+				AsignarLinea(cubo,c3,5,numero, -1);
+				AsignarLinea(cubo,c4,3,numero, -1);
+	
+				if (numero==0) { //BACK (0) Gira
+					String[][] a1 = ObtenerMatriz(cubo,0);
+					String[][] a2 = RotarCara(a1);
+					AsignarMatriz(cubo,a2,0);		
+				}
+				if(numero==dimension-1) { //FRONT (2) Gira		
+					String[][] a1 = ObtenerMatriz(cubo,2);
+					String[][] a2 = RotarCara(a1);
+					AsignarMatriz(cubo,a2,2);	
+				}
+			}
+			
+			if(flag==-90) {
+				c1 = ObtenerLinea(cubo,3,numero,-1);
+				c2 = ObtenerLinea(cubo,1,numero,-1);
+				c3 = ObtenerLinea(cubo,4,numero,-1);
+				c4 = ObtenerLinea(cubo,5,numero,-1);
+				AsignarLinea(cubo,c1,5,numero, -1);
+				AsignarLinea(cubo,c2,3,numero, -1);
+				AsignarLinea(cubo,c3,1,numero, -1);
+				AsignarLinea(cubo,c4,4,numero, -1);
+				
+				if (numero==0) { //BACK (0) Gira
+					for(int i=0; i<3; i++) {
+						String[][] a1 = ObtenerMatriz(cubo,0);
+						String[][] a2 = RotarCara(a1);
+						AsignarMatriz(cubo,a2,0);
+					}
+				}
+				if(numero==dimension-1) { //FRONT (2) Gira	
+					for(int i=0; i<3; i++) {
+						String[][] a1 = ObtenerMatriz(cubo,2);
+						String[][] a2 = RotarCara(a1);
+						AsignarMatriz(cubo,a2,2);
 					}
 				}
 				
