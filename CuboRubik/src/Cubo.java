@@ -21,73 +21,19 @@ public class Cubo {
 	private static int dimension;
 	private static int contador = 0;
     private static String stringCubo = "";
-    private static String sucia;
 	private static String ubicacionJSON = "C:\\Users\\victo\\OneDrive\\Desktop\\Sistemas Inteligentes\\JSON\\test1.json";
 
 		public static void main(String[] args) {
     	
-	        JSONParser parser = new JSONParser();
-	        
-	        try (Reader reader = new FileReader(ubicacionJSON)) {
-
-	            JSONObject jsonObject = (JSONObject) parser.parse(reader);
-
-	            JSONArray back = (JSONArray) jsonObject.get("BACK"); //0
-	            System.out.println(back);
+	        stringCubo = LeerJSON(ubicacionJSON);    
+			dimension = (int)Math.sqrt((stringCubo.length())/6);
+	        String array[] = stringCubo.split("");
 	            
-	            JSONArray down = (JSONArray) jsonObject.get("DOWN"); //1
-	            System.out.println(down);
-	            
-	            JSONArray front = (JSONArray) jsonObject.get("FRONT"); //2
-	            System.out.println(front);
-	            
-	            JSONArray left = (JSONArray) jsonObject.get("LEFT"); //3
-	            System.out.println(left);
-	            
-	            JSONArray right = (JSONArray) jsonObject.get("RIGHT"); //4
-	            System.out.println(right);
-
-	            JSONArray up = (JSONArray) jsonObject.get("UP"); //5
-	            System.out.println(up);                        
-	      
-	            for(int i=0; i<back.size(); i++){    	
-	                sucia = (back.get(i)).toString();
-	                stringCubo = stringCubo + Limpiar(sucia);
-	            }   
-	            
-	            for(int i=0; i<down.size(); i++){    	
-	                sucia = (down.get(i)).toString();
-	                stringCubo = stringCubo + Limpiar(sucia);
-	            }
-	            
-	            for(int i=0; i<front.size(); i++){    	
-	                sucia = (front.get(i)).toString();
-	                stringCubo = stringCubo + Limpiar(sucia);
-	            }
-	            
-	            for(int i=0; i<left.size(); i++){    	
-	                sucia = (left.get(i)).toString();
-	                stringCubo = stringCubo + Limpiar(sucia);
-	            }
-	            
-	            for(int i=0; i<right.size(); i++){    	
-	                sucia = (right.get(i)).toString();
-	                stringCubo = stringCubo + Limpiar(sucia);
-	            }
-	            
-	            for(int i=0; i<up.size(); i++){    	
-	                sucia = (up.get(i)).toString();
-	                stringCubo = stringCubo + Limpiar(sucia);
-	            }
-	            
-	            dimension = (int)Math.sqrt((stringCubo.length())/6);
-	            String array[] = stringCubo.split("");
-	            
-	/* 
-	 * Tras el proceso de conversion del JSON a un string, se asignan los valores a cada "mini-cubo" correspondiente.
-	 * El cubo se representa con un array tridimensional --> cubo[a][b][c], siendo 'a' el ID correspondiente a cada cara,
-	 * b el numero de fila dentro de esa cara, y c la columna dentro de esa fila
-	 */
+		/* 
+		 * Tras el proceso de conversion del JSON a un string, se asignan los valores a cada "mini-cubo" correspondiente.
+		 * El cubo se representa con un array tridimensional --> cubo[a][b][c], siendo 'a' el ID correspondiente a cada cara,
+		 * b el numero de fila dentro de esa cara, y c la columna dentro de esa fila
+		 */
 	            
 	            cubo = new String[6][dimension][dimension];  
 	            
@@ -102,18 +48,25 @@ public class Cubo {
 	            	}
     				
     				PintarMD5(cubo);
-    				Pintar("\n");
     				L(cubo,3,-90);
     				PintarMD5(cubo);
-
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        } catch (ParseException e) {
-	            e.printStackTrace();
-	        }
+    				D(cubo,1,90);
+    				PintarMD5(cubo);
+    				L(cubo,1,-90);
+    				PintarMD5(cubo);
+    				D(cubo,0,-90);
+    				PintarMD5(cubo);
+    				B(cubo,0,90);
+    				PintarMD5(cubo);
+    				B(cubo,5,-90);
+    				PintarMD5(cubo);
 	}
 		
-		/* ROJO: 0             BACK: 0
+		/*	-----------------------
+		 * 	------ Fin main -------
+		 * 	-----------------------
+		 * 
+		 * ROJO: 0             BACK: 0
 		 * AZUL: 1			   DOWN: 1
 		 * AMARILLO: 2		   FRONT: 2
 		 * VERDE: 3            LEFT: 3
@@ -142,7 +95,7 @@ public class Cubo {
 					String[][] a2 = RotarCara(a1);
 					AsignarMatriz(cubo,a2,3);
 				}
-				if(numero==dimension) { //RIGHT (4) Gira
+				if(numero==dimension-1) { //RIGHT (4) Gira
 					String[][] a1 = ObtenerMatriz(cubo,4);
 					String[][] a2 = RotarCara(a1);
 					AsignarMatriz(cubo,a2,4);
@@ -237,14 +190,14 @@ public class Cubo {
 		public static void B(String[][][] cubo,int numero, int flag) {
 			
 			if(flag==90) {
-				c1 = ObtenerLinea(cubo,3,numero,-1);
-				c2 = ObtenerLinea(cubo,1,numero,-1);
-				c3 = ObtenerLinea(cubo,4,numero,-1);
-				c4 = ObtenerLinea(cubo,5,numero,-1);
-				AsignarLinea(cubo,c1,1,numero, -1);
-				AsignarLinea(cubo,c2,4,numero, -1);
-				AsignarLinea(cubo,c3,5,numero, -1);
-				AsignarLinea(cubo,c4,3,numero, -1);
+				c1 = ObtenerLinea(cubo,3,-1,numero);
+				c2 = ObtenerLinea(cubo,1,-1,numero);
+				c3 = ObtenerLinea(cubo,4,-1,numero);
+				c4 = ObtenerLinea(cubo,5,-1,numero);
+				AsignarLinea(cubo,c1,1,-1,numero);
+				AsignarLinea(cubo,c2,4,-1,numero);
+				AsignarLinea(cubo,c3,5,-1,numero);
+				AsignarLinea(cubo,c4,3,-1,numero);
 	
 				if (numero==0) { //BACK (0) Gira
 					String[][] a1 = ObtenerMatriz(cubo,0);
@@ -259,14 +212,14 @@ public class Cubo {
 			}
 			
 			if(flag==-90) {
-				c1 = ObtenerLinea(cubo,3,numero,-1);
-				c2 = ObtenerLinea(cubo,1,numero,-1);
-				c3 = ObtenerLinea(cubo,4,numero,-1);
-				c4 = ObtenerLinea(cubo,5,numero,-1);
-				AsignarLinea(cubo,c1,5,numero, -1);
-				AsignarLinea(cubo,c2,3,numero, -1);
-				AsignarLinea(cubo,c3,1,numero, -1);
-				AsignarLinea(cubo,c4,4,numero, -1);
+				c1 = ObtenerLinea(cubo,3,-1,numero);
+				c2 = ObtenerLinea(cubo,1,-1,numero);
+				c3 = ObtenerLinea(cubo,4,-1,numero);
+				c4 = ObtenerLinea(cubo,5,-1,numero);
+				AsignarLinea(cubo,c1,5,-1,numero);
+				AsignarLinea(cubo,c2,3,-1,numero);
+				AsignarLinea(cubo,c3,1,-1,numero);
+				AsignarLinea(cubo,c4,4,-1,numero);
 				
 				if (numero==0) { //BACK (0) Gira
 					for(int i=0; i<3; i++) {
@@ -291,6 +244,69 @@ public class Cubo {
 		 * 	----- FUNCIONES AUXILIARES -----
 		 *  -------------------------------- 
 		 */
+		
+		public static String LeerJSON(String ubicacion) {
+	        JSONParser parser = new JSONParser();	        
+	        try (Reader reader = new FileReader(ubicacion)) {
+
+	            JSONObject jsonObject = (JSONObject) parser.parse(reader);
+
+	            JSONArray back = (JSONArray) jsonObject.get("BACK"); //0
+	            System.out.println(back);
+	            
+	            JSONArray down = (JSONArray) jsonObject.get("DOWN"); //1
+	            System.out.println(down);
+	            
+	            JSONArray front = (JSONArray) jsonObject.get("FRONT"); //2
+	            System.out.println(front);
+	            
+	            JSONArray left = (JSONArray) jsonObject.get("LEFT"); //3
+	            System.out.println(left);
+	            
+	            JSONArray right = (JSONArray) jsonObject.get("RIGHT"); //4
+	            System.out.println(right);
+
+	            JSONArray up = (JSONArray) jsonObject.get("UP"); //5
+	            System.out.println(up);                        
+	      
+	            String sucia;
+	            for(int i=0; i<back.size(); i++){    	
+	                sucia = (back.get(i)).toString();
+	                stringCubo = stringCubo + Limpiar(sucia);
+	            }   
+	            
+	            for(int i=0; i<down.size(); i++){    	
+	                sucia = (down.get(i)).toString();
+	                stringCubo = stringCubo + Limpiar(sucia);
+	            }
+	            
+	            for(int i=0; i<front.size(); i++){    	
+	                sucia = (front.get(i)).toString();
+	                stringCubo = stringCubo + Limpiar(sucia);
+	            }
+	            
+	            for(int i=0; i<left.size(); i++){    	
+	                sucia = (left.get(i)).toString();
+	                stringCubo = stringCubo + Limpiar(sucia);
+	            }
+	            
+	            for(int i=0; i<right.size(); i++){    	
+	                sucia = (right.get(i)).toString();
+	                stringCubo = stringCubo + Limpiar(sucia);
+	            }
+	            
+	            for(int i=0; i<up.size(); i++){    	
+	                sucia = (up.get(i)).toString();
+	                stringCubo = stringCubo + Limpiar(sucia);
+	            }
+	            
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        } catch (ParseException e) {
+	            e.printStackTrace();
+	        }
+			return stringCubo;
+		}
 		
 		public static String[] ObtenerLinea(String[][][] cubo, int cara, int columna, int fila) { //Si columna, fila -1
 			String aux[] = new String[dimension];
@@ -383,7 +399,7 @@ public class Cubo {
 		}
 		
 		public static void Pintar(Object input) {
-			System.out.print(input);
+			System.out.println(input);
 		}
 		
 		public static void PintarMD5 (String[][][] cubo) {
