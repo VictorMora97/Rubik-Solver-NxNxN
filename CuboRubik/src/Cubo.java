@@ -32,7 +32,7 @@ public class Cubo {
 		/* 
 		 * Tras el proceso de conversion del JSON a un string, se asignan los valores a cada "mini-cubo" correspondiente.
 		 * El cubo se representa con un array tridimensional --> cubo[a][b][c], siendo 'a' el ID correspondiente a cada cara,
-		 * b el numero de fila dentro de esa cara, y c la columna dentro de esa fila
+		 * b el numero de fila dentro de esa cara, y c la columna dentro de esa filaa
 		 */
 	            
 	            cubo = new String[6][dimension][dimension];  
