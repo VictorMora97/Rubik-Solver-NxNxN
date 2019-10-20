@@ -47,7 +47,7 @@ public class Cubo {
 	            		}            				
 	            	}
     				
-    				PintarMD5(cubo);
+    				/*PintarMD5(cubo);
     				L(cubo,3,-90);
     				PintarMD5(cubo);
     				D(cubo,1,90);
@@ -59,7 +59,7 @@ public class Cubo {
     				B(cubo,0,90);
     				PintarMD5(cubo);
     				B(cubo,5,-90);
-    				PintarMD5(cubo);
+    				PintarMD5(cubo);*/
 	}
 		
 		/*	-----------------------
