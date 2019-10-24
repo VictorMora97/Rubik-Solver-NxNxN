@@ -17,6 +17,7 @@ import org.json.simple.parser.ParseException;
 public class Cubo {
 	
     private static String[][][] cubo;
+    private static String[][][] copiaCubo;
     private static String[] c1,c2,c3,c4,c5,c6;
 	private static int dimension;
 	private static int contador = 0;
@@ -35,18 +36,20 @@ public class Cubo {
 		 * b el numero de fila dentro de esa cara, y c la columna dentro de esa filaa
 		 */
 	            
-	            cubo = new String[6][dimension][dimension];  
+	            setCubo(new String[6][dimension][dimension]); 
+	            copiaCubo = new String[6][dimension][dimension];
 	            
-    				for(int a=0; a<6; a++) { //ID de caras (BACK=0, DOWN=1...etc)
-    					for(int b=0; b<dimension; b++) { //Fila
-    						for(int c=0; c<dimension; c++) { //Columna							 
-		            			cubo[a][c][b]=array[contador];
-	            				contador = contador + 1;
-	            				//System.out.print(cubo[a][c][b]);	
-	            			}
-	            		}            				
-	            	}
+				for(int a=0; a<6; a++) { //ID de caras (BACK=0, DOWN=1...etc)
+					for(int b=0; b<dimension; b++) { //Fila
+						for(int c=0; c<dimension; c++) { //Columna							 
+	            			getCubo()[a][c][b]=array[contador];
+            				contador = contador + 1;
+            				//System.out.print(cubo[a][c][b]);	
+            			}
+            		}            				
+            	}
     				
+				Sucesores(cubo);
     				/*PintarMD5(cubo);
     				L(cubo,3,-90);
     				PintarMD5(cubo);
@@ -75,6 +78,46 @@ public class Cubo {
 		 * 
 		 * Flag: 90(+90º) y -90(-90º)
 		 */
+		
+		public static void Sucesores(String[][][] cubo) {
+			
+			for(int i=0;i<dimension;i++) { //Sucesores L
+				copiarCubo();
+				L(copiaCubo,i,90);
+				NodoArbol.crearNodo(cubo, copiaCubo,"L", i, 90, 1);
+				copiarCubo();
+				L(copiaCubo,i,-90);
+				NodoArbol.crearNodo(cubo, copiaCubo,"L", i, -90, 1);
+			}		
+			for(int i=0;i<dimension;i++) { //Sucesores D
+				copiarCubo();
+				D(copiaCubo,i,90);
+				NodoArbol.crearNodo(cubo, copiaCubo,"D", i, 90, 1);
+				copiarCubo();
+				D(copiaCubo,i,-90);
+				NodoArbol.crearNodo(cubo, copiaCubo,"D", i, -90, 1);
+			}		
+			for(int i=0;i<dimension;i++) { //Sucesores B
+				copiarCubo();
+				B(copiaCubo,i,90);
+				NodoArbol.crearNodo(cubo, copiaCubo,"B", i, 90, 1);
+				copiarCubo();
+				B(copiaCubo,i,-90);
+				NodoArbol.crearNodo(cubo, copiaCubo,"B", i, -90, 1);
+			}			
+		}
+		
+		public static void copiarCubo(){
+			String aux;	
+			for(int a=0; a<6; a++) { 
+				for(int b=0; b<dimension; b++) {
+					for(int c=0; c<dimension; c++) { 											
+						aux = getCubo()[a][c][b];    
+						copiaCubo[a][c][b] = aux;
+        			}
+        		}            				
+        	}
+	    }
 		
 		public static void L(String[][][] cubo,int numero, int flag) {
 			
@@ -405,7 +448,7 @@ public class Cubo {
 		public static void PintarMD5 (String[][][] cubo) {
 			
 			int cont = 0;
-			Vector vector = new Vector(500,50);	
+			Vector<String> vector = new Vector<String>(500,50);	
 			for(int a=0; a<6; a++) { 
 				for(int b=0; b<dimension; b++) {
 					for(int c=0; c<dimension; c++) { 					
@@ -435,6 +478,19 @@ public class Cubo {
 	            throw new RuntimeException(e); 
 	        } 
 	   }
+
+		public static String[][][] getCubo() {
+			return cubo;
+		}
+
+		public static String[][][] getCopiaCubo() {
+			return copiaCubo;
+		}
+
+
+		public static void setCubo(String[][][] cubo) {
+			Cubo.cubo = cubo;
+		}
 }     			
 				
 
