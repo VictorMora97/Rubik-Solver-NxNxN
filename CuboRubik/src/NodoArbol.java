@@ -16,9 +16,10 @@ public class NodoArbol {
 		//Cubo.PintarCubo(cuboPadre);
 		//Cubo.PintarCubo(cuboActual);
 		
+		
 	}
 	
-	public static int crearNodo(String[][][] cubo, String[][][] nuevoEstado, String movimiento, int numero, int flag, int coste) {
+	public static int crearNodo(String[][][] cubo, String[][][] nuevoEstado, String movimiento, int numero, int flag, int coste, int random) {
 		
 		cuboPadre = (String[][][])cubo.clone();
 		cuboActual = (String[][][])nuevoEstado.clone();
@@ -26,14 +27,9 @@ public class NodoArbol {
 		numAccion = numero;
 		flagAccion = flag;
 		costeAccion = coste;
-		f = getRandomNumberInRange(1, 10000);
-		Cubo.Pintar(accion+"-"+numAccion+"-"+flagAccion+"-"+costeAccion+"-"+f);
+		f = random;
+		Cubo.Pintar(accion+numAccion+" "+flagAccion+" "+costeAccion+"-"+f);
+				
 		return f;
-	}
-	
-	private static int getRandomNumberInRange(int min, int max) {
-
-		Random r = new Random();
-		return r.nextInt((max - min) + 1) + min;
 	}
 }

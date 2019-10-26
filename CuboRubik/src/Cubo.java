@@ -7,6 +7,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.Vector;
 
 import org.json.simple.JSONArray;
@@ -19,8 +20,9 @@ public class Cubo {
     private static String[][][] cubo;
     private static String[][][] copiaCubo;
     private static String[] c1,c2,c3,c4,c5,c6;
-	private static int dimension;
+	private static int dimension, f;
 	private static int contador = 0;
+	private static String aux;
     private static String stringCubo = "";
 	private static String ubicacionJSON = "C:\\Users\\victo\\OneDrive\\Desktop\\Sistemas Inteligentes\\JSON\\test1.json";
 
@@ -80,31 +82,56 @@ public class Cubo {
 		 */
 		
 		public static void Sucesores(String[][][] cubo) {
-			
-			for(int i=0;i<dimension;i++) { //Sucesores L
+			String tipo;
+			for(int i=0;i<dimension;i++) { //Sucesores L +90
 				copiarCubo();
 				L(copiaCubo,i,90);
-				NodoArbol.crearNodo(cubo, copiaCubo,"L", i, 90, 1);
+				f = getRandomNumberInRange(1, 10000);
+				aux = String.valueOf(f);
+				NodoArbol aux = new NodoArbol();
+				aux.crearNodo(cubo, copiaCubo,"L", i, 90, 1,f);
+			}
+			for(int i=0;i<dimension;i++) { //Sucesores L -90
 				copiarCubo();
 				L(copiaCubo,i,-90);
-				NodoArbol.crearNodo(cubo, copiaCubo,"L", i, -90, 1);
+				f = getRandomNumberInRange(1, 10000);
+				aux = String.valueOf(f);
+				NodoArbol aux = new NodoArbol();
+				aux.crearNodo(cubo, copiaCubo,"L", i, -90, 1,f);
 			}		
-			for(int i=0;i<dimension;i++) { //Sucesores D
+			for(int i=0;i<dimension;i++) { //Sucesores D +90
 				copiarCubo();
 				D(copiaCubo,i,90);
-				NodoArbol.crearNodo(cubo, copiaCubo,"D", i, 90, 1);
+				f = getRandomNumberInRange(1, 10000);
+				aux = String.valueOf(f);
+				NodoArbol aux = new NodoArbol();
+				aux.crearNodo(cubo, copiaCubo,"D", i, 90, 1,f);
+			}
+			for(int i=0;i<dimension;i++) { //Sucesores D -90
 				copiarCubo();
 				D(copiaCubo,i,-90);
-				NodoArbol.crearNodo(cubo, copiaCubo,"D", i, -90, 1);
+				f = getRandomNumberInRange(1, 10000);
+				aux = String.valueOf(f);
+				NodoArbol aux = new NodoArbol();
+				aux.crearNodo(cubo, copiaCubo,"D", i, -90, 1,f);
 			}		
-			for(int i=0;i<dimension;i++) { //Sucesores B
+			for(int i=0;i<dimension;i++) { //Sucesores B +90
 				copiarCubo();
 				B(copiaCubo,i,90);
-				NodoArbol.crearNodo(cubo, copiaCubo,"B", i, 90, 1);
+				f = getRandomNumberInRange(1, 10000);
+				aux = String.valueOf(f);
+				NodoArbol aux = new NodoArbol();
+				aux.crearNodo(cubo, copiaCubo,"B", i, 90, 1,f);
+			}
+			for(int i=0;i<dimension;i++) { //Sucesores B -90
 				copiarCubo();
 				B(copiaCubo,i,-90);
-				NodoArbol.crearNodo(cubo, copiaCubo,"B", i, -90, 1);
-			}			
+				f = getRandomNumberInRange(1, 10000);
+				aux = String.valueOf(f);
+				NodoArbol aux = new NodoArbol();
+				aux.crearNodo(cubo, copiaCubo,"B", i, -90, 1,f);
+			}		
+
 		}
 		
 		public static void copiarCubo(){
@@ -478,6 +505,12 @@ public class Cubo {
 	            throw new RuntimeException(e); 
 	        } 
 	   }
+		
+		private static int getRandomNumberInRange(int min, int max) {
+
+			Random r = new Random();
+			return r.nextInt((max - min) + 1) + min;
+		}
 
 		public static String[][][] getCubo() {
 			return cubo;
