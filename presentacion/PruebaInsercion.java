@@ -45,8 +45,8 @@ public class PruebaInsercion {
 		frontera.insertar(inicial);
 
 		for(int i=0;i<100;i++) {
-			NodoArbol nodo = new NodoArbol( inicial,estado,1,"B",5,10001);
-			f = getRandomNumberInRange(1, 10000000);
+			f = Tool.getRandomNumberInRange(1, 10000000);
+			NodoArbol nodo = new NodoArbol( inicial,estado,1,"B",5,f);		
 			long startTime = System.nanoTime();
 			frontera.insertar(nodo);
 			long finalTime = System.nanoTime();		
@@ -77,7 +77,7 @@ public class PruebaInsercion {
 		Tool.Pintar("Valores aleatorios de f:");
 		
 		for(int i=0;i<5;i++) {
-			f = getRandomNumberInRange(1, 10000);
+			f = Tool.getRandomNumberInRange(1, 10000);
 			NodoArbol nodo = new NodoArbol(inicial, estado,1,"L",5,f);
 			frontera.insertar(nodo);
 			Tool.Pintar(f);
@@ -88,8 +88,5 @@ public class PruebaInsercion {
 		Tool.Pintar("Primero en la cola: "+frontera.get());
 	}
 
-	private static int getRandomNumberInRange(int min, int max) {
-		Random r = new Random();
-		return r.nextInt((max - min) + 1) + min;
-	}
+
 }
