@@ -13,7 +13,6 @@ public class Stress {
 	static String ubicacion = "C:\\Users\\victo\\OneDrive\\Desktop\\Sistemas Inteligentes\\JSON\\test1.json";
 	static int f;
 
-
 	public static void main(String[] args) throws FileNotFoundException {
 		FronteraOrdenada frontera = new FronteraOrdenada();
 		EspacioEstados ee;
@@ -29,7 +28,8 @@ public class Stress {
 			f = Tool.getRandomNumberInRange(1, 10000000);
 			NodoArbol nodo = new NodoArbol( inicial,estado,1,"B",5,f);
 			frontera.insertar(nodo);
-
+			Tool.Pintar(frontera.size());
 		}
+		
 	}
 }
