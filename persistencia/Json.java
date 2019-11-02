@@ -1,6 +1,8 @@
 package persistencia;
+import org.json.JSONArray;
 import org.json.JSONML;
 import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import dominio.EspacioEstados;
 
@@ -36,14 +38,14 @@ public class Json {
 			
 		
 			JSONArray lista= (JSONArray) JsonEstado.get("listNodes");
-			Iterator<String> iterator =lista.iterator();
+			Iterator<Object> iterator =lista.iterator();
 			while (iterator.hasNext()) {
 				Nodos.add((String) iterator.next());
 			}
 			
-			EspacioEstados EE = new EspacioEstados(grafo,NodoInicial,Nodos);
+			//EspacioEstados EE = new EspacioEstados(grafo,NodoInicial,Nodos);
 			
-			return EE;
+			//return EE;
 			//String idMD5 = (String) EstadoInicial.get("id");
 			
 		}catch(Exception ex){
@@ -52,4 +54,5 @@ public class Json {
 		return null;
 }
 }
+
 

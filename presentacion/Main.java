@@ -22,7 +22,7 @@ public class Main {
 		EspacioEstados ee;
 		try {
 			
-			ee = new EspacioEstados("ejemplo.json");
+			ee = new EspacioEstados("C:\\Users\\victo\\OneDrive\\Desktop\\Sistemas Inteligentes\\JSON\\test1.json");
 			Estado estadoInicial = ee.getEstadoInicial();
 			
 			String result=estadoInicial.toString();

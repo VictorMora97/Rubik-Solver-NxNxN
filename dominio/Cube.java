@@ -1,4 +1,5 @@
 package dominio;
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -225,7 +226,7 @@ public class Cube {
 			result[i] = matrix[i].clone();
 		return result;
 	}
-	private String makeId(){
+	public String makeId(){
 		String sback="", sdown="", sfront ="", sleft="", sright="", sup="";
 		int n = back[0].length;
 		
@@ -243,17 +244,19 @@ public class Cube {
 	}
 	private static String md5(String password){
         
-		try {
-			MessageDigest md = MessageDigest.getInstance("MD5");
-		    md.update(password.getBytes());
-		    byte[] digest = md.digest();
-		    return  DatatypeConverter.printHexBinary(digest).toUpperCase();
-		    
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return "ERROR MD5";
-		}
+	        try { 
+	            MessageDigest md = MessageDigest.getInstance("MD5");  
+	            byte[] messageDigest = md.digest(password.getBytes()); 
+	            BigInteger no = new BigInteger(1, messageDigest);  
+	            String hashtext = no.toString(16); 
+	            while (hashtext.length() < 32) { 
+	                hashtext = "0" + hashtext; 
+	            } 
+	            return hashtext; 
+	        }  
+	        catch (NoSuchAlgorithmException e) { 
+	            throw new RuntimeException(e); 
+	        } 
 	    
 	         		   
 }
