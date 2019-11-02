@@ -5,6 +5,8 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.xml.bind.DatatypeConverter;
 
+import persistencia.Tool;
+
 public class Cube {
 	private short[][] back;	
 	private short[][] down;
