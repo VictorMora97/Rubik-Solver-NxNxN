@@ -32,7 +32,7 @@ public class Estado {
         return cubo.getId().equals( e.getCube().getId() );
     }
 	public String toString() {
-		return cubo.toString()+"\naccion:"+acci+"\ncoste de la accion: "+costAcci+"\n";
+		return acci+"\n"+cubo.toString();
 	}
 	
 }

@@ -7,14 +7,14 @@ public class NodoArbol implements Comparable<Object> {
 	private double coste;
 	private String accion = "None";
 	private double d;
-	private double f;
+	private int f;
 
 	
 	public NodoArbol(){
 		
 	}
 	
-	public NodoArbol(NodoArbol padre, Estado est, double coste,String accion, double d, double f){
+	public NodoArbol(NodoArbol padre, Estado est, double coste,String accion, double d, int f){
 		this.padre = padre;
 		this.est = est;
 		this.coste = coste;
@@ -67,7 +67,7 @@ public class NodoArbol implements Comparable<Object> {
 		return f;
 	}
 
-	public void setF(double f) {
+	public void setF(int f) {
 		this.f = f;
 	}
 	public boolean equals(Object t){
@@ -84,7 +84,7 @@ public class NodoArbol implements Comparable<Object> {
         else return 1;
     }
 	public String toString() {
-		return "accion: "+accion+" coste: "+coste+" profudidad: "+d+" f(): "+f+"\n"+est.toString()+"\n"; 
+		return "f: "+f;//"accion: "+accion+" coste: "+coste+" profudidad: "+d+" f(): "+f+"\n"+est.toString()+"\n"; 
 	}
 	
 }

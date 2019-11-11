@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import persistencia.AgentJSON;
+import persistencia.Tool;
 
 public class EspacioEstados {
     private Estado estadoInicial;
@@ -17,7 +18,6 @@ public class EspacioEstados {
     public Estado getEstadoInicial() {
 		return estadoInicial;
 	}
-
 
 	public List<Estado> sucesores(Estado e){
     	List<Estado> result = new LinkedList<>();
@@ -65,10 +65,4 @@ public class EspacioEstados {
     }
     
 }
-    	
     
-    	
-
-
-
-
