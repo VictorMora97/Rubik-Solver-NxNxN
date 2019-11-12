@@ -13,6 +13,7 @@ import dominio.Cube;
 import dominio.EspacioEstados;
 import dominio.Estado;
 import dominio.FronteraOrdenada;
+import dominio.FronteraQ;
 import dominio.NodoArbol;
 import persistencia.Tool;
 
@@ -41,7 +42,7 @@ public class PruebaInsercion {
 		Cube cube = estadoInicial.getCube();
 		Cube aux = cube.clone(); aux.B(2); 
 		Estado estado =  new Estado("B"+2,aux,1);	
-		NodoArbol inicial = new NodoArbol(null, estado,1,"B",5,10001);
+		NodoArbol inicial = new NodoArbol(null, estado,1,"B",5,f);
 		frontera.insertar(inicial);
 
 		for(int i=0;i<100;i++) {
@@ -72,7 +73,7 @@ public class PruebaInsercion {
 		Cube cube = estadoInicial.getCube();
 		Cube aux = cube.clone(); aux.B(2); 
 		Estado estado =  new Estado("B"+2,aux,1);	
-		NodoArbol inicial = new NodoArbol(null, estado,1,"B",5,10001);
+		NodoArbol inicial = new NodoArbol(null, estado,1,"B",5,100001);
 		frontera.insertar(inicial);
 		Tool.Pintar("Valores aleatorios de f:");
 		

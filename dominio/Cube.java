@@ -8,15 +8,15 @@ import javax.xml.bind.DatatypeConverter;
 import persistencia.Tool;
 
 public class Cube {
-	private short[][] back;	
-	private short[][] down;
-	private short[][] front;
-	private short[][] left;
-	private short[][] right;
-	private short[][] up;
+	private byte[][] back;	
+	private byte[][] down;
+	private byte[][] front;
+	private byte[][] left;
+	private byte[][] right;
+	private byte[][] up;
 	private int n;
 
-	public Cube(short[][] back, short[][] down, short[][] front, short[][] left, short[][] right, short[][] up){
+	public Cube(byte[][] back, byte[][] down, byte[][] front, byte[][] left, byte[][] right, byte[][] up){
 		this.back = back;	
 		this.down = down;
 		this.front = front;
@@ -35,7 +35,7 @@ public class Cube {
 	}
 	
 	public void B(int i){
-		short[] actual, siguiente;
+		byte[] actual, siguiente;
 		
 		actual = up[i];
 		siguiente = left[i];
@@ -59,7 +59,7 @@ public class Cube {
 
 	}
 	public void b(int i){
-		short[] actual, siguiente;
+		byte[] actual, siguiente;
 		
 		actual = left[i];
 		siguiente = up[i];
@@ -82,19 +82,19 @@ public class Cube {
 			girar(front,false);
 	}
 	public void D(int i){
-		short[] actual, siguiente;
+		byte[] actual, siguiente;
 		
 		actual = front[i];
-		siguiente =invertir(left[i]);
-		left[i] = actual;
+		siguiente =invertir(getCol(left, n-1-i));
+		setCol(left, n-1-i, actual);
 
 		actual = siguiente;
-		siguiente = invertir(back[i]);
-		back[i] = actual;
+		siguiente =back[n-1-i];
+		back[n-1-i] = actual;
 					
 		actual = siguiente;
-		siguiente = invertir(right[i]); 
-		right[i] = actual;
+		siguiente = invertir(getCol(right, i)); 
+		setCol(right, i, actual);
 
 		actual = siguiente;
 		front[i] = actual;
@@ -106,19 +106,19 @@ public class Cube {
 		
 	}
 	public void d(int i){
-		short[] actual, siguiente;
+		byte[] actual, siguiente;
 		
 		actual = invertir(front[i]);
-		siguiente = right[i];
-		right[i] = actual;
+		siguiente = getCol(right, i);
+		setCol(right, i, actual);
 
 		actual = siguiente;
-		siguiente = invertir(back[i]);
-		back[i] = actual;
+		siguiente = invertir(back[n-1-i]);
+		back[n-1-i] = actual;
 					
 		actual = siguiente;
-		siguiente = left[i]; 
-		left[i] = actual;
+		siguiente = getCol(left, n-1-i); 
+		setCol(left, n-1-i, actual);
 
 		actual = siguiente;
 		front[i] = actual;
@@ -129,21 +129,21 @@ public class Cube {
 			girar(up,false);
 	}
 	public void L(int i){
-		short[] actual, siguiente;
+		byte[] actual, siguiente;
 		
 		actual = front[i];
-		siguiente = down[i];
-		down[i] = actual;
+		siguiente = getCol(down, i);
+		setCol(down, i, actual);
 
 		actual = siguiente;
-		siguiente = back[i];
-		back[i] = actual;
+		siguiente = invertir(getCol(back, i));
+		setCol(back, i, actual);
 					
 		actual = siguiente;
-		siguiente = up[i]; 
-		up[i] = actual;
+		siguiente = invertir( getCol(up, n-1-i)); 
+		setCol(up, n-1-i, actual);
 
-		actual = invertir(siguiente);
+		actual = siguiente;
 		front[i] = actual;
 					
 		if(i==0)
@@ -153,22 +153,23 @@ public class Cube {
 
 	}
 	public void l(int i){
-		short[] actual, siguiente;
+		byte[] actual, siguiente;
 		
-		actual = invertir(front[i]);
-		siguiente =invertir( up[i]);
-		up[i] = actual;
+		
+		actual = invertir(getCol(front,i));
+		siguiente =invertir(getCol(up, n-1-i));
+		setCol(up, n-1-i, actual);
 
 		actual = siguiente;
-		siguiente = back[i];
-		back[i] = actual;
+		siguiente = getCol(back, i);
+		setCol(back, i, actual);
 					
 		actual = siguiente;
-		siguiente = down[i]; 
-		down[i] = actual;
+		siguiente = getCol(down, i); 
+		setCol(down, i, actual);
 
 		actual = siguiente;
-		front[i] = actual;
+		setCol(front, i, actual);
 					
 		if(i==0)
 			girar(left,false);
@@ -183,15 +184,16 @@ public class Cube {
 		+"front"+print(front)+"\n"	
 		+"left"+print(left)+"\n"	
 		+"right"+print(right)+"\n"	
-		+"up"+print(up)+"\n";
+		+"up"+print(up)+"\n"
+		+getId()+"\n";
 		
 	}
 	public Cube clone() {
 		return new Cube(clone(back),clone(down),clone(front),clone(left),clone(right),clone(up));
 	}
 	
-	private void girar(short[][] matrix, boolean right){
-		short[][] aux = clone(matrix);
+	private void girar(byte[][] matrix, boolean right){
+		byte[][] aux = clone(matrix);
 		if(right)
 			for(int i=0,j=matrix.length-1 ; j>-1; i++,j--)
 				setCol(matrix, j, aux[i]);
@@ -200,18 +202,24 @@ public class Cube {
 				setCol(matrix, i, invertir(aux[i]));
 		
 	}
-	private short[] invertir(short[] matrix){
-		short[] result = new short[matrix.length];
+	private byte[] invertir(byte[] matrix){
+		byte[] result = new byte[matrix.length];
 		for(int i=0,j=matrix.length-1;i<matrix.length;i++,j--)
 			result[i] = matrix[j];
 		return result;
 	}
-	private void setCol(short[][] matrix, int i, short[] col ) {
+	private byte[] getCol(byte[][] matrix, int i) {
+		byte[] result = new byte[matrix.length];
+		for(int j = 0;j<matrix.length;j++)
+			result[j] = matrix[j][i] ;
+		return result;
+	}
+	private void setCol(byte[][] matrix, int i, byte[] col ) {
 		for(int j = 0;j<matrix.length;j++)
 			matrix[j][i] = col[j];
 		
 	}
-	private String print(short[][] matrix){
+	private String print(byte[][] matrix){
 		String result ="[";
 		for(int i=0;i<matrix.length;i++) {
 			result+="[";
@@ -222,8 +230,8 @@ public class Cube {
 		}
 		return result +"]";
 	}
-	private short[][] clone(short[][] matrix){
-		short[][] result = new short[matrix.length][matrix.length];
+	private byte[][] clone(byte[][] matrix){
+		byte[][] result = new byte[matrix.length][matrix.length];
 		for(int i=0;i<matrix.length;i++)
 			result[i] = matrix[i].clone();
 		return result;

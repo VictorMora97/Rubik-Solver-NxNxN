@@ -34,7 +34,8 @@ public class PruebaMovimientos {
 	    	cube.l(2);
 	    	Tool.Pintar(cube.makeId()+"  <-- ¿es igual? -->  "+"151faa80eb7b01fa8db7e8129778de10  \n");
 	    	cube.d(1);
-	    	Tool.Pintar(cube.makeId()); Tool.Pintar("  <-- ¿es igual? -->  "); Tool.Pintar("e8682bbb2e6fabf5971e4b471ae2d46d  \n");
+	    	Tool.Pintar(cube.makeId()+"  <-- ¿es igual? -->  "+"e8682bbb2e6fabf5971e4b471ae2d46d  \n");
+			cube.B(1);
 			
 	}
 

@@ -18,7 +18,7 @@ public class AgentJSON {
 
 	public static Cube getCube(String ruta) throws FileNotFoundException {
 		
-		short[][] back, down, front, left,right,up;
+		byte[][] back, down, front, left,right,up;
 
 		String file = readFile(ruta);
 		JsonParser parser = new JsonParser();
@@ -42,9 +42,9 @@ public class AgentJSON {
 		scanner.close();
 		return result;
 	}
-	private static short[][] getMatrix(JsonObject obj,String name){
-		List<List<Short>> lsI;
-	    List<Short> lsJ;
+	private static byte[][] getMatrix(JsonObject obj,String name){
+		List<List<Byte>> lsI;
+	    List<Byte> lsJ;
 	    JsonArray matrix, submatrix;
 	    
 		matrix = obj.get(name).getAsJsonArray();
@@ -53,16 +53,16 @@ public class AgentJSON {
 	    	submatrix = element.getAsJsonArray();
 	    	lsJ = new LinkedList<>();
 	    	for(JsonElement subElement : submatrix)
-	    		lsJ.add(subElement.getAsShort());
+	    		lsJ.add(subElement.getAsByte());
 	    		
 	    	lsI.add(lsJ);
 	    }
 	    return toMatrix(lsI);
 		
 	}
-	private static short[][] toMatrix(List<List<Short>> ls){
+	private static byte[][] toMatrix(List<List<Byte>> ls){
 		int n = ls.size();
-		short[][] result = new short[n][n];
+		byte[][] result = new byte[n][n];
 		for(int i=0;i<n;i++)
 			for(int j=0;j<n;j++)
 				result[i][j] = ls.get(i).get(j);

@@ -4,7 +4,7 @@ package dominio;
 public class Estado {
 	private Cube cubo;
 	
-	//Estas variables no tienen xq estar aqui pero las he aÃ±adido para evitar crear una clase nueva para los sucesores
+	//Estas variables no tienen xq estar aqui pero las he añadido para evitar crear una clase nueva para los sucesores
 	private String acci;
 	private int costAcci;
  
@@ -32,7 +32,7 @@ public class Estado {
         return cubo.getId().equals( e.getCube().getId() );
     }
 	public String toString() {
-		return cubo.toString()+"\naccion:"+acci+"\ncoste de la accion: "+costAcci+"\n";
+		return acci+"\n"+cubo.toString();
 	}
 	
 }
