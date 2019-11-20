@@ -7,10 +7,11 @@ import java.io.PrintWriter;
 import dominio.Cube;
 import dominio.EspacioEstados;
 import dominio.Estado;
+import dominio.Problema;
 
 public class Main {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 		/*short[][] back = {{1,2,3},{0,0,0},{0,0,0}};	
 		short[][] down = {{10,10,10},{11,11,11},{12,12,12}};	
@@ -26,15 +27,22 @@ public class Main {
 			Estado estadoInicial = ee.getEstadoInicial();
 			
 			String result=estadoInicial.toString();
+			
 			for(Estado e : ee.sucesores(estadoInicial))
 				result += e.toString();
 			System.out.println(result);
 			save("rubick.out",result);
 			
 			
+			
+			//Problema.busqueda("profundidad iterativa",3,1);
+			
 		} catch (FileNotFoundException e1) {e1.printStackTrace();}
 		
 
+		
+		
+		
 	}
 	private static void save(String fileName, String text) {
 		try{

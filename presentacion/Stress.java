@@ -28,7 +28,7 @@ public class Stress {
 			f = Tool.getRandomNumberInRange(1, 10000000);
 			NodoArbol nodo = new NodoArbol( inicial,estado,1,"B",5,f);
 			frontera.insertar(nodo);
-			Tool.Pintar(frontera.size());
+			//Tool.Pintar(frontera.size());
 		}
 		
 	}

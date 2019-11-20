@@ -10,5 +10,7 @@
 	<classpathentry kind="lib" path="C:/Users/victo/OneDrive/Desktop/Sistemas Inteligentes/javax.xml.bind.jar"/>
 	<classpathentry kind="lib" path="C:/Users/victo/OneDrive/Desktop/Sistemas Inteligentes/json-20190722.jar"/>
 	<classpathentry kind="lib" path="C:/Users/victo/OneDrive/Desktop/Sistemas Inteligentes/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/victo/OneDrive/Desktop/Sistemas Inteligentes/javac.jar"/>
+	<classpathentry kind="lib" path="C:/Users/victo/OneDrive/Desktop/Sistemas Inteligentes/sorcerer-javac-0.8.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

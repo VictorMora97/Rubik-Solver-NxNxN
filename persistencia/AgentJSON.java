@@ -15,7 +15,6 @@ import dominio.Cube;
 
 public class AgentJSON {
 	
-
 	public static Cube getCube(String ruta) throws FileNotFoundException {
 		
 		byte[][] back, down, front, left,right,up;
@@ -32,8 +31,8 @@ public class AgentJSON {
 	    up = getMatrix(obj,"UP");
 	    
 	    return new Cube(back,down,front,left,right,up);
-
 	}
+	
 	private static String readFile(String ruta) throws FileNotFoundException {
 		String result ="";
 		Scanner scanner = new Scanner(new File(ruta));

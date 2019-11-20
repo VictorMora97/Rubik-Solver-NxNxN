@@ -40,7 +40,7 @@ public class Cube {
 		actual = up[i];
 		siguiente = left[i];
 		left[i] = actual;
-
+	
 		actual = siguiente;
 		siguiente = down[i];
 		down[i] = actual;
@@ -48,7 +48,7 @@ public class Cube {
 		actual = siguiente;
 		siguiente = right[i]; 
 		right[i] = actual;
-
+	
 		actual = siguiente;
 		up[i] = actual;
 					
@@ -56,7 +56,6 @@ public class Cube {
 			girar(back,true);
 		else if(i == n-1)
 			girar(front,true);
-
 	}
 	public void b(int i){
 		byte[] actual, siguiente;
@@ -87,7 +86,7 @@ public class Cube {
 		actual = front[i];
 		siguiente =invertir(getCol(left, n-1-i));
 		setCol(left, n-1-i, actual);
-
+	
 		actual = siguiente;
 		siguiente =back[n-1-i];
 		back[n-1-i] = actual;
@@ -95,7 +94,7 @@ public class Cube {
 		actual = siguiente;
 		siguiente = invertir(getCol(right, i)); 
 		setCol(right, i, actual);
-
+	
 		actual = siguiente;
 		front[i] = actual;
 					
@@ -253,22 +252,38 @@ public class Cube {
 				
 	}
 	private static String md5(String password){
-        
-	        try { 
-	            MessageDigest md = MessageDigest.getInstance("MD5");  
-	            byte[] messageDigest = md.digest(password.getBytes()); 
-	            BigInteger no = new BigInteger(1, messageDigest);  
-	            String hashtext = no.toString(16); 
-	            while (hashtext.length() < 32) { 
-	                hashtext = "0" + hashtext; 
+	    try { 
+	        MessageDigest md = MessageDigest.getInstance("MD5");  
+	        byte[] messageDigest = md.digest(password.getBytes()); 
+	        BigInteger no = new BigInteger(1, messageDigest);  
+	        String hashtext = no.toString(16); 
+	        while (hashtext.length() < 32) { 
+	            hashtext = "0" + hashtext; 
 	            } 
 	            return hashtext; 
 	        }  
 	        catch (NoSuchAlgorithmException e) { 
 	            throw new RuntimeException(e); 
-	        } 
-	    
-	         		   
+	        }         		   
 }
+
+	public byte[][] getBack() {
+		return back;
+	}
+	public byte[][] getDown() {
+		return down;
+	}
+	public byte[][] getLeft() {
+		return left;
+	}
+	public byte[][] getRight() {
+		return right;
+	}
+	public byte[][] getFront() {
+		return front;
+	}
+	public byte[][] getUp() {
+		return up;
+	}
 
 }

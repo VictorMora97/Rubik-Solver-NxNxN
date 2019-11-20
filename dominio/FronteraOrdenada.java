@@ -4,6 +4,8 @@ package dominio;
 import java.util.List;
 import java.util.PriorityQueue;
 
+import persistencia.Tool;
+
 
 public class FronteraOrdenada extends Frontera {
 
@@ -16,10 +18,10 @@ public class FronteraOrdenada extends Frontera {
 	public boolean insertar(NodoArbol nA) {	
 		return colaFrontera.offer(nA);
 	}
-	public boolean insertar(List<NodoArbol> lista){
+	public boolean insertarLista(List<NodoArbol> lista){
         boolean out = true;
-        for(int i=0;i<lista.size();i++)
-            out &= insertar(lista.get(i));
+        for(int i=0;i<lista.size();i++) 
+            out &= insertar(lista.get(i));   
         return out;
     }
 	public NodoArbol get(){return colaFrontera.peek();}
@@ -27,6 +29,7 @@ public class FronteraOrdenada extends Frontera {
 	public NodoArbol eliminar() {
 		return colaFrontera.poll();
 	}
+
 
 
 	public boolean esVacia() {

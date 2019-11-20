@@ -7,14 +7,14 @@ public class NodoArbol implements Comparable<Object> {
 	private double coste;
 	private String accion = "None";
 	private double d;
-	private int f;
+	private double f;
 
 	
 	public NodoArbol(){
 		
 	}
 	
-	public NodoArbol(NodoArbol padre, Estado est, double coste,String accion, double d, int f){
+	public NodoArbol(NodoArbol padre, Estado est, double coste,String accion, double d, double f){
 		this.padre = padre;
 		this.est = est;
 		this.coste = coste;

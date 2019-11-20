@@ -8,14 +8,14 @@ import persistencia.AgentJSON;
 import persistencia.Tool;
 
 public class EspacioEstados {
-    private Estado estadoInicial;
+    private static Estado estadoInicial;
     
     public EspacioEstados(String ruta) throws FileNotFoundException {
 
 			estadoInicial = new Estado("inicio",AgentJSON.getCube(ruta),0);
 
     }
-    public Estado getEstadoInicial() {
+    public static Estado getEstadoInicial() {
 		return estadoInicial;
 	}
 
