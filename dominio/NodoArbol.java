@@ -3,18 +3,19 @@ package dominio;
 public class NodoArbol implements Comparable<Object> {
 
 	private NodoArbol padre;
+	private int id_nodo;
 	private Estado est;
 	private double coste;
 	private String accion = "None";
 	private double d;
-	private int f;
+	private double f;
 
 	
 	public NodoArbol(){
 		
 	}
 	
-	public NodoArbol(NodoArbol padre, Estado est, double coste,String accion, double d, int f){
+	public NodoArbol(NodoArbol padre, Estado est,String accion, double coste, double d, double f){
 		this.padre = padre;
 		this.est = est;
 		this.coste = coste;
@@ -29,6 +30,15 @@ public class NodoArbol implements Comparable<Object> {
 
 	public void setPadre(NodoArbol padre) {
 		this.padre = padre;
+	}
+	
+
+	public int getId_nodo() {
+		return id_nodo;
+	}
+
+	public void setId_nodo(int id_nodo) {
+		this.id_nodo = id_nodo;
 	}
 
 	public Estado getEstado() {
@@ -67,7 +77,7 @@ public class NodoArbol implements Comparable<Object> {
 		return f;
 	}
 
-	public void setF(int f) {
+	public void setF(double f) {
 		this.f = f;
 	}
 	public boolean equals(Object t){
@@ -84,7 +94,7 @@ public class NodoArbol implements Comparable<Object> {
         else return 1;
     }
 	public String toString() {
-		return "f: "+f;//"accion: "+accion+" coste: "+coste+" profudidad: "+d+" f(): "+f+"\n"+est.toString()+"\n"; 
+		return "["+id_nodo+"]"+"("+"["+ est.getAcci()+"],"+est.getCube().getId()+","+coste+","+d+","+f+")\n"; 
 	}
 	
 }
