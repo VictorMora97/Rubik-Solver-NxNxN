@@ -6,21 +6,36 @@ import java.io.PrintWriter;
 
 import dominio.Cube;
 import dominio.EspacioEstados;
-import dominio.Estado;
 import dominio.Problema;
 
 public class Main {
 	
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args){
 		EspacioEstados ee;
 		Cube cube,aux;
 		Problema prob;
 		
-		prob = new Problema("ejemplo.json");
+		try {
+			prob = new Problema("3x3.json");
+			if(prob.busqueda("profundidad iterativa", 30, 1)) {
+				System.out.println(prob.getSolucion().toString());
+		    	save("rubick.out",prob.getSolucion().toString());
+		    	}
+			else System.out.println("No he encontrado la solucion con A");
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-
 		
-		private static void llamarArchivo (Problema prob,String estrategia,int Prof_Max,int Inc_Prof) throws Exception {
+		
+	}
+		
+		private static void llamarArchivo(Problema p, String estrategia, int Prof_Max, int Inc_Prof) throws Exception {
 			 boolean sol = p.busqueda(estrategia, Prof_Max, Inc_Prof);
 			 
 		
@@ -91,7 +106,7 @@ public class Main {
 		} catch (FileNotFoundException e1) {e1.printStackTrace();}
 		*/
 
-	}
+	
 	private static void save(String fileName, String text) {
 		try{
 			PrintWriter fileOut=new PrintWriter(new FileWriter(new File(fileName)));

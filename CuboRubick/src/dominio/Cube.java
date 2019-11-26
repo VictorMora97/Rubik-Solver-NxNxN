@@ -33,6 +33,9 @@ public class Cube {
 	public String getId() {
 		return makeId();
 	}
+	public double getH() {
+		return entropia(back)+entropia(down)+entropia(front)+entropia(left)+entropia(right)+entropia(up);
+	}
 	
 	public byte[][] getBack() {
 		return back;
@@ -215,6 +218,9 @@ public class Cube {
 	public Cube clone() {
 		return new Cube(clone(back),clone(down),clone(front),clone(left),clone(right),clone(up));
 	}
+	public boolean equals(Object obj) {
+		return getId().equals( ((Cube) obj ).getId() );
+	}
 	
 	private void girar(byte[][] matrix, boolean right){
 		byte[][] aux = clone(matrix);
@@ -260,7 +266,7 @@ public class Cube {
 			result[i] = matrix[i].clone();
 		return result;
 	}
-	public String makeId(){
+	private String makeId(){
 		String sback="", sdown="", sfront ="", sleft="", sright="", sup="";
 		int n = back[0].length;
 		
@@ -276,9 +282,7 @@ public class Cube {
 		return md5(sback+sdown+sfront+sleft+sright+sup);
 				
 	}
-	public double getH() {
-		return entropia(back)+entropia(down)+entropia(front)+entropia(left)+entropia(right)+entropia(up);
-	}
+
 	private double entropia(byte[][] matrix) {
 		
 		int[] contador = new int[6];
