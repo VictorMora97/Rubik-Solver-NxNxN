@@ -1,4 +1,4 @@
-package presentacion;
+/*package presentacion;
 
 import java.io.FileNotFoundException;
 import java.util.Random;
@@ -90,4 +90,4 @@ public class PruebaInsercion {
 	}
 
 
-}
+}   */

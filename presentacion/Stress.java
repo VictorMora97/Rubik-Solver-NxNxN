@@ -1,4 +1,4 @@
-package presentacion;
+/*package presentacion;
 
 import java.io.FileNotFoundException;
 
@@ -32,4 +32,4 @@ public class Stress {
 		}
 		
 	}
-}
+}*/

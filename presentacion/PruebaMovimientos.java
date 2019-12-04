@@ -11,14 +11,18 @@ public class PruebaMovimientos {
 	
 	public static void main(String[] args) throws FileNotFoundException  {
 		EspacioEstados ee;
-		String ubicacion = "C:\\Users\\victo\\OneDrive\\Desktop\\Sistemas Inteligentes\\JSON\\test1.json";
+		String ubicacion = "C:\\Users\\victo\\OneDrive\\Desktop\\Sistemas Inteligentes\\JSON\\last.json";
 		
 			
 			ee = new EspacioEstados(ubicacion);
 			Estado estadoInicial = ee.getEstadoInicial();
 			Cube cube = estadoInicial.getCube();
-	    	
-			Tool.Pintar(cube.makeId()+"  <-- ¿es igual? -->  "+"69db38e2ce96d3044adc00e612a810b0  \n");  
+			Tool.Pintar(cube);
+	    	//cube.B(0);
+	    	//Tool.Pintar(cube);
+	    	cube.l(0);
+	    	Tool.Pintar(cube);
+			/*Tool.Pintar(cube.makeId()+"  <-- ¿es igual? -->  "+"69db38e2ce96d3044adc00e612a810b0  \n");  
 	    	cube.l(3);
 	    	Tool.Pintar(cube.makeId()+"  <-- ¿es igual? -->  "+"130d0d212b8cc15f375b1b0f2cdf42ad  \n");
 	    	cube.D(1);
@@ -35,7 +39,7 @@ public class PruebaMovimientos {
 	    	Tool.Pintar(cube.makeId()+"  <-- ¿es igual? -->  "+"151faa80eb7b01fa8db7e8129778de10  \n");
 	    	cube.d(1);
 	    	Tool.Pintar(cube.makeId()+"  <-- ¿es igual? -->  "+"e8682bbb2e6fabf5971e4b471ae2d46d  \n");
-			cube.B(1);
+			cube.B(1);  */
 			
 	}
 
