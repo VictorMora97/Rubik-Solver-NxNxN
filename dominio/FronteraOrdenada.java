@@ -1,11 +1,9 @@
 package dominio;
 
-
 import java.util.List;
 import java.util.PriorityQueue;
 
 import persistencia.Tool;
-
 
 public class FronteraOrdenada extends Frontera {
 
@@ -29,8 +27,6 @@ public class FronteraOrdenada extends Frontera {
 	public NodoArbol eliminar() {
 		return colaFrontera.poll();
 	}
-
-
 
 	public boolean esVacia() {
 		return colaFrontera.isEmpty();

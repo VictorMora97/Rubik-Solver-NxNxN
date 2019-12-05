@@ -3,8 +3,6 @@ package dominio;
 
 public class Estado {
 	private Cube cubo;
-	
-	//Estas variables no tienen xq estar aqui pero las he añadido para evitar crear una clase nueva para los sucesores
 	private String acci;
 	private int costAcci;
  
@@ -17,7 +15,6 @@ public class Estado {
 	public Cube getCube() {
 		return cubo;
 	}
-	
 	
 	public String getAcci() {
 		return acci;

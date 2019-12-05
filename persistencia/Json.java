@@ -11,20 +11,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
-
-
 @SuppressWarnings("deprecation")
 public class Json {
 	
 	public Json() {}
 	private static List<String> Nodos = new ArrayList<>();
 
-	
-
 	@SuppressWarnings("unchecked")
-	public EspacioEstados leer(String archivo) {
-		
+	public EspacioEstados leer(String archivo) {		
 	
 		JSONParser parser = new JSONParser();
 		try{
@@ -41,13 +35,7 @@ public class Json {
 			Iterator<Object> iterator =lista.iterator();
 			while (iterator.hasNext()) {
 				Nodos.add((String) iterator.next());
-			}
-			
-			//EspacioEstados EE = new EspacioEstados(grafo,NodoInicial,Nodos);
-			
-			//return EE;
-			//String idMD5 = (String) EstadoInicial.get("id");
-			
+			}						
 		}catch(Exception ex){
 			System.err.println("Error: "+ex.toString());
 		}

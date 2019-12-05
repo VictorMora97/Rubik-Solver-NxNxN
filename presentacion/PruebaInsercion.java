@@ -13,7 +13,6 @@ import dominio.Cube;
 import dominio.EspacioEstados;
 import dominio.Estado;
 import dominio.FronteraOrdenada;
-import dominio.FronteraQ;
 import dominio.NodoArbol;
 import persistencia.Tool;
 

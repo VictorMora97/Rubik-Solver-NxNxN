@@ -25,15 +25,14 @@ public class Main {
 		int estrategia,Prof_Max=0, Inc_Prof;
 		
 		
-		//System.out.println("Introduzca la direccion del json");
-		//String archivo = TECLADO.nextLine();
-		String archivo ="C:\\Users\\victo\\OneDrive\\Desktop\\Sistemas Inteligentes\\JSON\\pruebas.json";
+		System.out.println("Introduzca la direccion del json");
+		String archivo = TECLADO.nextLine();
 		Problema p= new Problema(archivo);
 		
 		while(fin) {
 		
 		System.out.println("Ahora seleccione la estrategia a usar");
-		System.out.println("1. Anchura\n2. Costo uniforme\n3. Profundidad acotada\n4. Profundidad iterativa\n5. Voraz\n6. A*\n0.Finalizar");
+		System.out.println("1. Anchura\n2. Costo uniforme\n3. Profundidad acotada\n4. Voraz\n5. A*\n0.Finalizar");
 		estrategia=TECLADO.nextInt();
 		if(estrategia!=0) {
 			System.out.println("Introduzca la Profundidad maxima");
@@ -51,17 +50,12 @@ public class Main {
 			break;
 
 		case 3:
-			llamarArchivo(p,"profundidad acotada",Prof_Max,Prof_Max);
+			llamarArchivo(p,"profundidad",Prof_Max,Prof_Max);
 			break;
 		case 4:
-			System.out.println("Introduzca el incremento de la profundidad");
-			Inc_Prof=TECLADO.nextInt();
-			llamarArchivo(p,"profundidad iterativa",Prof_Max,Inc_Prof);
-			break;
-		case 5:
 			llamarArchivo(p,"voraz",Prof_Max,Prof_Max);
 			break;
-		case 6:
+		case 5:
 			llamarArchivo(p,"A",Prof_Max,Prof_Max);
 			break;
 		default:

@@ -10,11 +10,9 @@ public class NodoArbol implements Comparable<Object> {
 	private double d;
 	private double f;
 
-	
 	public NodoArbol(){
 		
-	}
-	
+	}	
 	public NodoArbol(NodoArbol padre, Estado est,String accion, double coste, double d, double f){
 		this.padre = padre;
 		this.est = est;
@@ -32,7 +30,6 @@ public class NodoArbol implements Comparable<Object> {
 		this.padre = padre;
 	}
 	
-
 	public int getId_nodo() {
 		return id_nodo;
 	}
@@ -81,7 +78,6 @@ public class NodoArbol implements Comparable<Object> {
 		this.f = f;
 	}
 	public boolean equals(Object t){
-        //comparo los vertices de lestado actual y el introducido
         return est.equals( ((NodoArbol)t).getEstado() );
     }
 	@Override
@@ -89,9 +85,11 @@ public class NodoArbol implements Comparable<Object> {
 		NodoArbol nodo= ((NodoArbol)na);
         double valor = nodo.getF();
 
-        if(this.f == valor) return -1; //-1
-        else if(this.f < valor) return 1; //Antes era 0, luego 1
-        else return 1; //1
+        // (-1,1,1) para anchura y profundidad
+        // (1,-1,1) para voraz
+        if(this.f == valor) return -1; 
+        else if(this.f < valor) return 1; 
+        else return 1; 
     }
 	public String toString() {
 		return ((getPadre() != null)? getPadre().toString():"")+"["+id_nodo+"](["+ est.getAcci()+"], "+est.getCube().getId()+", "+getCoste()+","+getD()+", "+getF()+")\n";  
