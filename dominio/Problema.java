@@ -27,9 +27,9 @@ public class Problema {
     public static void main(String[] args) throws Exception {
     	
         Problema prob = new Problema(ubicacion);	
-        prob.busqueda("profundidad acotada",6,1);
-        System.out.println("Nodos -> creados:"+cnt_creado+", frontera:"+prob.cnt_frontera+", abiertos:"+prob.cnt_abierto);
-        	
+        prob.busqueda("A",6,1);
+       // System.out.println("Nodos -> creados:"+cnt_creado+", frontera:"+prob.cnt_frontera+", abiertos:"+prob.cnt_abierto);
+               	
         }
 	
     public NodoArbol getSolucion() {
@@ -39,6 +39,8 @@ public class Problema {
 	public Problema(String ruta) throws FileNotFoundException {
 		espacioEstados = new EspacioEstados(ruta);
 		estadoInicial = EspacioEstados.getEstadoInicial();
+		//Tool.Pintar(estadoInicial.getCube().getH());
+		Tool.Pintar(estadoInicial);
 	}
 	
 	public boolean busqueda(String estrategia,int Prof_Max,int Inc_Prof) throws Exception {
@@ -53,15 +55,20 @@ public class Problema {
 	    		Tool.Pintar(solucion);
 	    	case "costo uniforme":
 	    		solucion = busquedaAcotada(estrategia,Prof_Max);
-	    	case "profundidad acotada":
+	    	case "profundidad":
 	    		solucion = busquedaAcotada(estrategia,Prof_Max);
 	    		Tool.Pintar(solucion.getEstado());
 	    		Tool.Pintar(solucion);
 	    	case "voraz":
 	    		solucion = busquedaAcotada(estrategia,Prof_Max);
- 
 	    	break;
-	    		
+	    	
+	    	case "A":
+	    		solucion = busquedaAcotada(estrategia,Prof_Max);
+	    		Tool.Pintar(solucion.getEstado());
+	    		Tool.Pintar(solucion);
+	    	break;  
+	    	
 	    	case "profundidad iterativa":
 	    		while (solucion==null && Prof_Actual <= Prof_Max){
 	                solucion = busquedaAcotada(estrategia,Prof_Actual);
@@ -121,37 +128,17 @@ public class Problema {
         //*************
         return n_actual;
 	}
-	public boolean esObjetivo(Estado e) {
-		Cube cube = e.getCube();
-		return isEqual(cube.getBack())
-			&& isEqual(cube.getDown())
-			&& isEqual(cube.getFront())
-			&& isEqual(cube.getLeft())
-			&& isEqual(cube.getRight())
-			&& isEqual(cube.getUp());
-	}
-	private boolean isEqual(byte[][] matrix) {
-		byte aux = matrix[0][0];
-		for(int i=0; i< matrix.length;i++) {
-			for(int j=0; j< matrix.length;j++) {
-				if(matrix[i][j] != aux ) { 
-					return false;}
-			}
-		}
-		
-		return true;
-	}
+
     
 
 	private static List<NodoArbol> ListaNodosArbol(List<Estado> LS, NodoArbol n_padre,int Prof_Max, String estrategia){
 		List<NodoArbol> result = new LinkedList<>();
 		
 		for(Estado estadoActual : LS) {
-			//double f = calcularF(n_padre,estadoActual,estrategia);	
+			double f = calcularF(n_padre,estadoActual,estrategia);	
 			
 			//si es inferior a la profundidad maxima
-			if(n_padre.getD() < Prof_Max) {
-				double f = calcularF(n_padre,estadoActual,estrategia);
+			if(n_padre.getD() < Prof_Max) {		
 				NodoArbol nodo = new NodoArbol(n_padre, estadoActual,estadoActual.getAcci() ,n_padre.getCoste()+1, n_padre.getD()+1,f);
 				//contadorID++;
 				//nodo.setId_nodo(contadorID);
@@ -166,34 +153,31 @@ public class Problema {
 	}
 
 	private static double calcularF(NodoArbol padre,Estado estado,String estrategia){
-        double g=0, h=0;
-           
-        switch(estrategia){
-            case "anchura":
-                g = padre.getD()+1; //profundidad positiva
-            break;
-            case "costo uniforme":
-            	g = padre.getCoste()+1;  //coste positivo
-            break;  
-            
-            
-            case "profundidad acotada":
-            	g = 1/(padre.getD()+1);
-            	
-            break;	
-            case "profundidad iterativa":
-                g = 1/(padre.getD()+1); // profundidad negativa
-            break;
-            case "voraz":
-            	h = estado.getCube().getH();
-            	break;
-            case "A":
-            	g = padre.getD()+1;
-                h = estado.getCube().getH();
-            break;
-        }
-        return g+h;
-    }
+	    double g=0, h=0;
+	       
+	    switch(estrategia){
+	        case "anchura":
+	            g = padre.getD()+1; 
+	        break;
+	        case "costo uniforme":
+	        	g = padre.getCoste()+1;  
+	        break;                        
+	        case "profundidad":
+	        	g = -(padre.getD()+1); 	
+	        break;	
+	        case "profundidad iterativa":
+	            g = -(padre.getD()+1); 
+	        break;
+	        case "voraz":
+	        	h = estado.getCube().getH();
+	        	break;
+	        case "A":
+	        	g = padre.getD()+1;
+	            h = estado.getCube().getH();
+	        break;
+	    }
+	    return (g+h);
+	}
 	
 	
 	
@@ -218,7 +202,26 @@ public class Problema {
 	}
 	
 	
-	
+	public boolean esObjetivo(Estado e) {
+		Cube cube = e.getCube();
+		return isEqual(cube.getBack())
+			&& isEqual(cube.getDown())
+			&& isEqual(cube.getFront())
+			&& isEqual(cube.getLeft())
+			&& isEqual(cube.getRight())
+			&& isEqual(cube.getUp());
+	}
+	private boolean isEqual(byte[][] matrix) {
+		byte aux = matrix[0][0];
+		for(int i=0; i< matrix.length;i++) {
+			for(int j=0; j< matrix.length;j++) {
+				if(matrix[i][j] != aux ) { 
+					return false;}
+			}
+		}
+		
+		return true;
+	}
 	
 	
 	private static void save(String fileName, String text) {

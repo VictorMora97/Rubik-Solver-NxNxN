@@ -89,9 +89,9 @@ public class NodoArbol implements Comparable<Object> {
 		NodoArbol nodo= ((NodoArbol)na);
         double valor = nodo.getF();
 
-        if(this.f == valor) return -1;
-        else if(this.f < valor) return 1;
-        else return 1;
+        if(this.f == valor) return -1; //-1
+        else if(this.f < valor) return 1; //Antes era 0, luego 1
+        else return 1; //1
     }
 	public String toString() {
 		return ((getPadre() != null)? getPadre().toString():"")+"["+id_nodo+"](["+ est.getAcci()+"], "+est.getCube().getId()+", "+getCoste()+","+getD()+", "+getF()+")\n";  

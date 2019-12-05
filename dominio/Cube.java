@@ -266,30 +266,52 @@ public class Cube {
 	            throw new RuntimeException(e); 
 	        }         		   
 }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	private double entropia(byte[][] matrix) {
-		
+		double aux;
 		int[] contador = new int[6];
 		double entropia=0;
 		
 		//cuento los colores
-		for(int i=0;i<n;i++)
-			for(int j=0;j<n;j++)
+		for(int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				//System.out.print(matrix[i][j]);
 				contador[matrix[i][j]]++;
-		
+			}
+		}		
 		//calculo la entropia
-		for (int c= 0; c<6; c++)
-			if (contador[c]>0)                    // log(exp) en base (base) = log neperiano de (exp) / log neperiano de (base)
-				entropia +=  contador[c]/(n*n) * ( Math.log(contador[c]/(n*n)) / Math.log(6));
-		return entropia;
-		
+		for (int c= 0; c<6; c++) {
+			if (contador[c]>0.0) {                   // log(exp) en base (base) = log neperiano de (exp) / log neperiano de (base)
+				aux = (contador[c]*1.0)/(n*n);
+				entropia = entropia + aux *  (Math.log(aux)/Math.log(6));
+			}
+		//System.out.print(contador[c]);
+		}
+		//Tool.Pintar(entropia);
+		return -entropia;		
 	}
 
-	public byte[][] getBack() {
-		return back;
-	}
 	public double getH() {
 		return entropia(back)+entropia(down)+entropia(front)+entropia(left)+entropia(right)+entropia(up);
 	}
+	
+	
+	
+	
+	
+	public byte[][] getBack() {
+		return back;
+	}
+
 	public byte[][] getDown() {
 		return down;
 	}
