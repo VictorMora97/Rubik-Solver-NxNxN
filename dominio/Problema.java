@@ -27,7 +27,7 @@ public class Problema {
     public static void main(String[] args) throws Exception {
     	
         Problema prob = new Problema(ubicacion);	
-        prob.busqueda("A",6,1);
+        prob.busqueda("voraz",6,1);
        // System.out.println("Nodos -> creados:"+cnt_creado+", frontera:"+prob.cnt_frontera+", abiertos:"+prob.cnt_abierto);
                	
         }
@@ -40,7 +40,7 @@ public class Problema {
 		espacioEstados = new EspacioEstados(ruta);
 		estadoInicial = EspacioEstados.getEstadoInicial();
 		//Tool.Pintar(estadoInicial.getCube().getH());
-		Tool.Pintar(estadoInicial);
+		//Tool.Pintar(estadoInicial);
 	}
 	
 	public boolean busqueda(String estrategia,int Prof_Max,int Inc_Prof) throws Exception {
@@ -51,8 +51,8 @@ public class Problema {
     	switch(estrategia) {
 	    	case "anchura":
 	    		solucion = busquedaAcotada(estrategia,Prof_Max);
-	    		Tool.Pintar(solucion.getEstado());
-	    		Tool.Pintar(solucion);
+	    		//Tool.Pintar(solucion.getEstado());
+	    		//Tool.Pintar(solucion);
 	    	case "costo uniforme":
 	    		solucion = busquedaAcotada(estrategia,Prof_Max);
 	    	case "profundidad":
@@ -61,6 +61,8 @@ public class Problema {
 	    		Tool.Pintar(solucion);
 	    	case "voraz":
 	    		solucion = busquedaAcotada(estrategia,Prof_Max);
+	    		Tool.Pintar(solucion.getEstado());
+	    		Tool.Pintar(solucion);
 	    	break;
 	    	
 	    	case "A":
@@ -170,9 +172,9 @@ public class Problema {
 	        break;
 	        case "voraz":
 	        	h = estado.getCube().getH();
-	        	break;
+	         break;
 	        case "A":
-	        	g = padre.getD()+1;
+	        	g = padre.getCoste()+1;
 	            h = estado.getCube().getH();
 	        break;
 	    }
