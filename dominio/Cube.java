@@ -130,10 +130,14 @@ public class Cube {
 	public void L(int i){
 		byte[] actual, siguiente;
 		
-		actual = front[i];
+		/*actual = front[i];
+		siguiente = getCol(down, i);
+		setCol(down, i, actual);*/
+
+		actual = getCol(front, i);
 		siguiente = getCol(down, i);
 		setCol(down, i, actual);
-
+		
 		actual = siguiente;
 		siguiente = invertir(getCol(back, i));
 		setCol(back, i, actual);
@@ -143,7 +147,7 @@ public class Cube {
 		setCol(up, n-1-i, actual);
 
 		actual = siguiente;
-		front[i] = actual;
+		setCol(front, i, actual);
 					
 		if(i==0)
 			girar(left,true);
