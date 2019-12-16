@@ -33,6 +33,5 @@ public class FronteraOrdenada extends Frontera {
 	}
 
 	public int size() {return colaFrontera.size();}
-
-	
+		
 }

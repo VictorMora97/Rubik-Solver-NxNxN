@@ -65,6 +65,9 @@ public class NodoArbol implements Comparable<Object> {
 	public double getD() {
 		return d;
 	}
+	public double getidNodo() {
+		return id_nodo;
+	}
 
 	public void setD(double d) {
 		this.d = d;
@@ -84,12 +87,19 @@ public class NodoArbol implements Comparable<Object> {
 	public int compareTo(Object na){
 		NodoArbol nodo= ((NodoArbol)na);
         double valor = nodo.getF();
+        double id = nodo.getidNodo();
 
-        // (-1,1,1) para anchura y profundidad
-        // (1,-1,1) para voraz
-        if(this.f == valor) return -1; 
-        else if(this.f < valor) return 1; 
-        else return 1; 
+        if(this.f == valor) {
+        	if (this.id_nodo < id){
+        		return -1;
+        	}
+        else {
+        	return 1; 
+        } 
+        }
+        if(this.f < valor) return -1; 
+        else return 1;
+
     }
 	public String toString() {
 		return ((getPadre() != null)? getPadre().toString():"")+"["+id_nodo+"](["+ est.getAcci()+"], "+est.getCube().getId()+", "+getCoste()+","+getD()+", "+getF()+")\n";  

@@ -1,6 +1,7 @@
 package dominio;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,18 +22,10 @@ public class EspacioEstados {
 	}
 
 	public List<Estado> sucesores(Estado e){
-    	List<Estado> result = new LinkedList<>();
+    	//List<Estado> result = new LinkedList<>();
+		List<Estado> result = new ArrayList<>();
     	Cube cube = e.getCube();
     	Cube aux;
-
-    	/*for(int i = 0;i<cube.getN();i++) {    	
-   			aux = cube.clone(); aux.B(i); result.add(new Estado("B"+i,aux,1));
-    		aux = cube.clone(); aux.b(i); result.add(new Estado("b"+i,aux,1));
-    		aux = cube.clone(); aux.D(i); result.add(new Estado("D"+i,aux,1));
-    		aux = cube.clone(); aux.d(i); result.add(new Estado("d"+i,aux,1));
-    		aux = cube.clone(); aux.L(i); result.add(new Estado("L"+i,aux,1));
-    		aux = cube.clone(); aux.l(i); result.add(new Estado("l"+i,aux,1));
-    	}  */
     	
     	for(int i = 0;i<cube.getN();i++) {
     		aux = cube.clone(); aux.B(i); result.add(new Estado("B"+i,aux,1));
@@ -51,8 +44,7 @@ public class EspacioEstados {
     	}
     	for(int i = 0;i<cube.getN();i++) {
     		aux = cube.clone(); aux.l(i); result.add(new Estado("l"+i,aux,1));
-    	} 
-    	
+    	}  	
     	return result;
     }
     

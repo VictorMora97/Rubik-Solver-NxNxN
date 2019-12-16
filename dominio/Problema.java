@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,9 +21,11 @@ public class Problema {
 	private static int cnt_creado;
 	private int cnt_frontera;
 	private int cnt_abierto;
-
-    private static List<NodoArbol> listaPoda= new LinkedList<>();
 	
+	
+    private static List<NodoArbol> listaPoda= new LinkedList<>();
+    static Frontera frontera = new FronteraOrdenada();
+    
     public NodoArbol getSolucion() {
 		return solucion;
 	}
@@ -64,10 +68,11 @@ public class Problema {
 	    
 	    if(estadoInicial != null){     
 	    	Frontera frontera = new FronteraOrdenada(); 
-	    	cnt_creado = 1;
+	    	cnt_creado = 0;
 	    	cnt_frontera = cnt_abierto = 0;
-	    	 
-	    	n_actual = new NodoArbol(null, estadoInicial, "",0, 0, 0);
+	    	n_actual = new NodoArbol(null, estadoInicial, "",-1, 0, 0);
+	    	double f = calcularF(n_actual,estadoInicial,estrategia);
+	    	n_actual = new NodoArbol(null, estadoInicial, "",0, 0, f);
 	        frontera.insertar(n_actual);
 	        cnt_frontera++;
 	        
@@ -83,7 +88,7 @@ public class Problema {
 	                    List<NodoArbol> LN = ListaNodosArbol(LS,n_actual,Prof_Max,estrategia);
 	                    cnt_frontera += LN.size();
 	                    frontera.insertarLista(LN);
-	                }catch(Exception e){ System.out.println("Problema ln97 "+e);
+	                }catch(Exception e){ 
 	            }    
 	        }
 	    }
@@ -99,7 +104,7 @@ public class Problema {
 			
 			if(n_padre.getD() < Prof_Max) {		
 				NodoArbol nodo = new NodoArbol(n_padre, estadoActual,estadoActual.getAcci() ,n_padre.getCoste()+1, n_padre.getD()+1,f);
-				nodo.setCoste( n_padre.getD()+1);
+				nodo.setCoste( n_padre.getCoste()+1);
 				cnt_creado++;
 				nodo.setId_nodo(cnt_creado);
 				result.add(nodo);
@@ -132,9 +137,8 @@ public class Problema {
 	            h = estado.getCube().getH();
 	        break;
 	    }
-	    return (g+h);
+	   return Math.round((g+h)*100d)/100d;
 	}
-	
 	
 	public boolean esObjetivo(Estado e) {
 		Cube cube = e.getCube();

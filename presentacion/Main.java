@@ -25,8 +25,9 @@ public class Main {
 		int estrategia,Prof_Max=0, Inc_Prof;
 		
 		
-		System.out.println("Introduzca la direccion del json");
-		String archivo = TECLADO.nextLine();
+		//System.out.println("Introduzca la direccion del json");
+		//String archivo = TECLADO.nextLine();
+		String archivo = "C:\\Users\\victo\\OneDrive\\Desktop\\Sistemas Inteligentes\\JSON\\pruebas.json";
 		Problema p= new Problema(archivo);
 		
 		while(fin) {
@@ -48,7 +49,6 @@ public class Main {
 		case 2:
 			llamarArchivo(p,"costo uniforme",Prof_Max,Prof_Max);
 			break;
-
 		case 3:
 			llamarArchivo(p,"profundidad",Prof_Max,Prof_Max);
 			break;
